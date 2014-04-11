@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :concert_id %><br>
-    <%= f.number_field :concert_id %>
+    <%= f.select :concert_id, options_from_collection_for_select(Concert.all, :id, :title) %>
   </div>
   <div class="actions">
     <%= f.submit %>

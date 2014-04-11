@@ -15,7 +15,7 @@
     <% @recordings.each do |recording| %>
       <tr>
         <td><%= recording.title %></td>
-        <td><%= recording.concert_id %></td>
+        <td><%= recording.concert.title %></td>
         <td><%= link_to 'Show', recording %></td>
         <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
         <td><%= link_to 'Destroy', recording, method: :delete, data: { confirm: 'Are you sure?' } %></td>
