@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Concert</th>
+      <th>Listening</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= recording.title %></td>
         <td><%= recording.concert.title %></td>
+        <td><%= recording.listening? %></td>
         <td><%= link_to 'Show', recording %></td>
         <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
         <td><%= link_to 'Destroy', recording, method: :delete, data: { confirm: 'Are you sure?' } %></td>

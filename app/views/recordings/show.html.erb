@@ -10,5 +10,11 @@
   <%= @recording.concert.title %>
 </p>
 
+<p>
+  <strong>Listening:</strong>
+  <%= @recording.listening? %>
+</p>
+
+
 <%= link_to 'Edit', edit_recording_path(@recording) %> |
 <%= link_to 'Back', recordings_path %>
