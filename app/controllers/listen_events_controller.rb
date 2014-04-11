@@ -1,2 +1,0 @@
-class ListenEventsController < ApplicationController
-end
