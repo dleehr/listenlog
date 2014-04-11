@@ -1,4 +1,5 @@
 Listenlog::Application.routes.draw do
+  root 'concerts#index'
   resources :listen_events
 
   resources :recordings
