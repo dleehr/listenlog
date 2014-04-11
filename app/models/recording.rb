@@ -17,7 +17,7 @@ class Recording < ActiveRecord::Base
 
   def finish_listening
     if listen_events.empty? || listen_events.last.is_start?
-      listen_event = ListenEvent.start_event
+      listen_event = ListenEvent.finish_event
       listen_events << listen_event
       listen_event
     else
