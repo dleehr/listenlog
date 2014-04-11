@@ -11,6 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140411193624) do
+
+  create_table "concerts", force: true do |t|
+    t.string   "performer"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "listen_events", force: true do |t|
+    t.integer  "type"
+    t.integer  "recording_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recordings", force: true do |t|
+    t.string   "title"
+    t.integer  "concert_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
