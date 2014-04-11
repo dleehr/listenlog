@@ -1,0 +1,29 @@
+<h1>Listing listen_events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Recording</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @listen_events.each do |listen_event| %>
+      <tr>
+        <td><%= listen_event.type %></td>
+        <td><%= listen_event.recording_id %></td>
+        <td><%= link_to 'Show', listen_event %></td>
+        <td><%= link_to 'Edit', edit_listen_event_path(listen_event) %></td>
+        <td><%= link_to 'Destroy', listen_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Listen event', new_listen_event_path %>

@@ -1,0 +1,29 @@
+<h1>Listing recordings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Concert</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordings.each do |recording| %>
+      <tr>
+        <td><%= recording.title %></td>
+        <td><%= recording.concert_id %></td>
+        <td><%= link_to 'Show', recording %></td>
+        <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
+        <td><%= link_to 'Destroy', recording, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recording', new_recording_path %>

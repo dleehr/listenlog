@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @listen_event.type %>
+</p>
+
+<p>
+  <strong>Recording:</strong>
+  <%= @listen_event.recording_id %>
+</p>
+
+<%= link_to 'Edit', edit_listen_event_path(@listen_event) %> |
+<%= link_to 'Back', listen_events_path %>
