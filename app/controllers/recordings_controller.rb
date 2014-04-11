@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy]
+  before_action :set_recording, only: [:show, :edit, :update, :destroy, :start_listening, :finish_listening]
   # GET /recordings
   # GET /recordings.json
   def index
@@ -59,6 +59,37 @@ class RecordingsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # POST /recordings/1/start_listening
+  # POST /recordings/1/start_listening.json
+  def start_listening
+    listen_event = @recording.start_listening
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Started listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to start listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /recordings/1/finish_listening
+  # POST /recordings/1/finish_listening.json
+  def finish_listening
+    listen_event = @recording.finish_listening
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Finished listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to finish listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

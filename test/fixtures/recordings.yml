@@ -7,3 +7,7 @@ sv_atlanta:
 ob_la:
   title: Official Bootleg 24/96 FLAC
   concert: la
+
+aud_la:
+  title: Audience Recording
+  concert: la

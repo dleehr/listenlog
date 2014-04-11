@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RecordingsControllerTest < ActionController::TestCase
   setup do
-    @recording = recordings(:ob_la)
+    @recording = recordings(:aud_la)
   end
 
   test "should get index" do
@@ -46,4 +46,19 @@ class RecordingsControllerTest < ActionController::TestCase
 
     assert_redirected_to recordings_path
   end
+
+  test "should start listening" do
+    assert_difference('ListenEvent.count', 1) do
+      post :start_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should finish listening" do
+    assert_difference('ListenEvent.count', 1) do
+      post :finish_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
 end

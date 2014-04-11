@@ -9,6 +9,7 @@ class Recording < ActiveRecord::Base
       listen_events << listen_event
       listen_event
     else
+      errors.add(:listen_events, "Listening in progress, stop first")
       nil
     end
 
@@ -20,6 +21,7 @@ class Recording < ActiveRecord::Base
       listen_events << listen_event
       listen_event
     else
+      errors.add(:listen_events, "No listen in progress, cannot stop")
       nil
     end
   end

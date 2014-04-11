@@ -2,7 +2,12 @@ Listenlog::Application.routes.draw do
   root 'concerts#index'
   resources :listen_events
 
-  resources :recordings
+  resources :recordings do
+    member do
+      post :start_listening
+      post :finish_listening
+    end
+  end
 
   resources :concerts
 
