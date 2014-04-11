@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  concert_id: 1
+sv_atlanta:
+  title: SV Release
+  concert: atlanta
 
-two:
-  title: MyString
-  concert_id: 1
+ob_la:
+  title: Official Bootleg 24/96 FLAC
+  concert: la

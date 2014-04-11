@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  performer: MyString
-  date: 2014-04-11
+atlanta:
+  performer: Pearl Jam
+  date: 1994-04-03
 
-two:
-  performer: MyString
-  date: 2014-04-11
+la:
+  performer: Pearl Jam
+  date: 2013-11-24

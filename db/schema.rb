@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140411193624) do
   end
 
   create_table "listen_events", force: true do |t|
-    t.integer  "type"
+    t.integer  "event_type"
     t.integer  "recording_id"
     t.datetime "created_at"
     t.datetime "updated_at"

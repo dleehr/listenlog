@@ -14,7 +14,7 @@
   <tbody>
     <% @listen_events.each do |listen_event| %>
       <tr>
-        <td><%= listen_event.type %></td>
+        <td><%= listen_event.event_type %></td>
         <td><%= listen_event.recording_id %></td>
         <td><%= link_to 'Show', listen_event %></td>
         <td><%= link_to 'Edit', edit_listen_event_path(listen_event) %></td>

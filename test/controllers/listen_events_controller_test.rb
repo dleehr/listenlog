@@ -18,7 +18,7 @@ class ListenEventsControllerTest < ActionController::TestCase
 
   test "should create listen_event" do
     assert_difference('ListenEvent.count') do
-      post :create, listen_event: { recording_id: @listen_event.recording_id, type: @listen_event.type }
+      post :create, listen_event: { recording_id: @listen_event.recording_id, event_type: @listen_event.event_type}
     end
 
     assert_redirected_to listen_event_path(assigns(:listen_event))
@@ -35,7 +35,7 @@ class ListenEventsControllerTest < ActionController::TestCase
   end
 
   test "should update listen_event" do
-    patch :update, id: @listen_event, listen_event: { recording_id: @listen_event.recording_id, type: @listen_event.type }
+    patch :update, id: @listen_event, listen_event: { recording_id: @listen_event.recording_id, event_type: @listen_event.event_type }
     assert_redirected_to listen_event_path(assigns(:listen_event))
   end
 
