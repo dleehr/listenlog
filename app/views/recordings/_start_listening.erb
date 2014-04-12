@@ -1,0 +1,5 @@
+<%= form_for(@recording, :url=> {:action => 'start_listening', :method => :post}) do |f| %>
+  <div class="actions">
+    <%= f.submit 'Start Listening' %>
+  </div>
+<% end %>

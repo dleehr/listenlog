@@ -4,8 +4,8 @@ Listenlog::Application.routes.draw do
 
   resources :recordings do
     member do
-      post :start_listening
-      post :finish_listening
+      post 'start_listening'
+      post 'finish_listening'
     end
   end
 
