@@ -3,7 +3,11 @@ class RecordingsController < ApplicationController
   # GET /recordings
   # GET /recordings.json
   def index
-    @recordings = Recording.all
+    if params[:concert]
+      @recordings = Recording.by_concert(params[:concert])
+    else
+      @recordings = Recording.all
+    end
   end
 
   # GET /recordings/1

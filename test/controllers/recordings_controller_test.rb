@@ -61,4 +61,11 @@ class RecordingsControllerTest < ActionController::TestCase
     assert_redirected_to recording_path(assigns(:recording))
   end
 
+  test "shows recordings in concert" do
+    get :index, :concert => @recording.concert.id
+    assert_response :success
+    assert_not_nil assigns(:recordings)
+    assert_includes assigns(:recordings), @recording
+  end
+
 end
