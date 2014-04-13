@@ -1,5 +1,5 @@
-<%= form_for(@recording, :url=> {:action => 'start_listening', :method => :post}) do |f| %>
+<%= form_tag start_listening_recording_url do %>
   <div class="actions">
-    <%= f.submit 'Start Listening' %>
+    <%= submit_tag 'Start Listening' %>
   </div>
 <% end %>
