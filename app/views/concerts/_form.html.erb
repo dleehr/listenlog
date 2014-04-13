@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date %>
+    <%= f.date_select :date, :start_year => 1990, :end_year => Date.today.year %>
   </div>
   <div class="actions">
     <%= f.submit %>

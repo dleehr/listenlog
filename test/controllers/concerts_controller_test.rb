@@ -51,4 +51,11 @@ class ConcertsControllerTest < ActionController::TestCase
     get :show, id: @concert
     assert_select 'li', @concert.recordings.first.title
   end
+
+  test "should show years starting 1990 on new" do
+    get :new
+    assert_select 'select' do
+      assert_select 'option', '1990'
+    end
+  end
 end
