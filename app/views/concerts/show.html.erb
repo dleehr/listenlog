@@ -9,6 +9,13 @@
   <strong>Date:</strong>
   <%= @concert.date %>
 </p>
-
+<p>
+  <string>Recordings:</string>
+  <ul>
+    <% @concert.recordings.each do |recording| %>
+      <li><%= link_to recording.title, recording %></li>
+    <% end %>
+  </ul>
+</p>
 <%= link_to 'Edit', edit_concert_path(@concert) %> |
 <%= link_to 'Back', concerts_path %>

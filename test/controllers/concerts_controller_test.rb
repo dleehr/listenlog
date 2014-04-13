@@ -46,4 +46,9 @@ class ConcertsControllerTest < ActionController::TestCase
 
     assert_redirected_to concerts_path
   end
+
+  test "should display recordings" do
+    get :show, id: @concert
+    assert_select 'li', @concert.recordings.first.title
+  end
 end
