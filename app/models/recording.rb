@@ -2,6 +2,7 @@ class Recording < ActiveRecord::Base
   belongs_to :concert
   has_many :listen_events, :dependent => :destroy
   scope :by_concert, lambda{|c| where(:concert_id => c)}
+  validates :title, :presence => true
 
   def start_listening
     # if the last event is a start_listening fail

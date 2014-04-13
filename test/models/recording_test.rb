@@ -12,4 +12,8 @@ class RecordingTest < ActiveSupport::TestCase
     assert r.finish_listening, 'could not stop listening'
     assert_not r.listening?, 'should not be listening?'
   end
+  test 'cannot save without title' do
+    r = Recording.new
+    assert_not r.save, 'should not save without a file'
+  end
 end
