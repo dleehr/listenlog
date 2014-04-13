@@ -68,4 +68,23 @@ class RecordingsControllerTest < ActionController::TestCase
     assert_includes assigns(:recordings), @recording
   end
 
+  test "shows listening status and action" do
+    get :show, id: @recording
+    assert_not @recording.listening?
+    assert_response :success
+    assert_select 'div.actions' do
+      assert_select '[value=?]', 'Start Listening'
+    end
+    assert_difference('ListenEvent.count', 1) do
+      post :start_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+    get :show, id: @recording
+    assert @recording.listening?
+    assert_response :success
+    assert_select 'div.actions' do
+      assert_select '[value=?]', 'Finish Listening'
+    end
+  end
+
 end
