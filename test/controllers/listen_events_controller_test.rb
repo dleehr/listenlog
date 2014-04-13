@@ -46,4 +46,12 @@ class ListenEventsControllerTest < ActionController::TestCase
 
     assert_redirected_to listen_events_path
   end
+
+  test "shows listen events in recording" do
+    get :index, :recording => @listen_event.recording.id
+    assert_response :success
+    assert_not_nil assigns(:listen_events)
+    assert_includes assigns(:listen_events), @listen_event
+  end
+
 end

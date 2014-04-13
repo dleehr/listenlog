@@ -4,7 +4,11 @@ class ListenEventsController < ApplicationController
   # GET /listen_events
   # GET /listen_events.json
   def index
-    @listen_events = ListenEvent.all
+    if params[:recording]
+      @listen_events = ListenEvent.by_recording(params[:recording])
+    else
+      @listen_events = ListenEvent.all
+    end
   end
 
   # GET /listen_events/1
