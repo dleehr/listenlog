@@ -9,7 +9,6 @@ class Recording < ActiveRecord::Base
   validates :title, :presence => true
 
   def start_listening
-    # if the last event is a start_listening fail
     unless listening?
       self.listening = true
       save

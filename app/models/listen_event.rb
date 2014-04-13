@@ -5,7 +5,7 @@ class ListenEvent < ActiveRecord::Base
   scope :by_recording, lambda{|r| where(:recording_id=> r)}
   scope :start_events, lambda{ where :event_type => START }
   scope :finish_events, lambda{ where :event_type => FINISH }
-
+  order :created_at
 
   def is_start?
     event_type == START
