@@ -13,7 +13,11 @@
 <p>
   <strong>Listening:</strong>
   <%= @recording.listening? %>
-  <%= render 'start_listening' %>
+  <% if @recording.listening? %>
+    <%= render 'finish_listening' %>
+  <% else %>
+    <%= render 'start_listening' %>
+  <% end %>
 </p>
 
 
