@@ -52,6 +52,13 @@ class ConcertsControllerTest < ActionController::TestCase
     assert_select 'li', @concert.recordings.first.title
   end
 
+  test "should display json recordings" do
+    get :show, {id: @concert, format: :json}
+    assert_response :success
+    parsed_body = JSON.parse(@response.body)
+    assert parsed_body['recordings'].count > 0, 'no recordings found in json response'
+  end
+
   test "should show years starting 1990 on new" do
     get :new
     assert_select 'select' do
