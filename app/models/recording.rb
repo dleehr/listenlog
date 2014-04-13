@@ -2,8 +2,9 @@ class Recording < ActiveRecord::Base
   belongs_to :concert
   has_many :listen_events, :dependent => :destroy
   scope :by_concert, lambda{|c| where(:concert_id => c)}
-  scope :listening, lambda{ where(listening: true)}
-  scope :not_listening, lambda{ where(listening:false)}
+  scope :by_listening, lambda{|l| where(listening: l)}
+  scope :listening, lambda{ by_listening(true)}
+  scope :not_listening, lambda{ by_listening(false)}
 
   validates :title, :presence => true
 
