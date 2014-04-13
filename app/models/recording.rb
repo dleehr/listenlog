@@ -29,8 +29,7 @@ class Recording < ActiveRecord::Base
   end
 
   def listening?
-    return false if listen_events.empty?
-    listen_events.last.is_start?
+    listening
   end
 
 end
