@@ -16,4 +16,12 @@ class RecordingTest < ActiveSupport::TestCase
     r = Recording.new
     assert_not r.save, 'should not save without a file'
   end
+
+  test 'can get listening recordings' do
+    listening_count = Recording.listening.count
+    not_listening_count = Recording.not_listening.count
+    total_count = Recording.count
+    assert_equal total_count, listening_count + not_listening_count, 'listening + not listening should equal total'
+    assert_equal Recording.listening, Recording.by_listening(true), 'listening should equal by_listening(true)'
+  end
 end

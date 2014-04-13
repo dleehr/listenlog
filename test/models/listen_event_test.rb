@@ -12,4 +12,19 @@ class ListenEventTest < ActiveSupport::TestCase
     assert ev.is_finish?, 'event is not a finish event'
     assert_not ev.is_start?, 'event is a start event'
   end
+
+  test 'can get start events' do
+    assert_not_empty ListenEvent.start_events
+    ListenEvent.start_events.each do |event|
+      assert event.is_start?, 'event in start_events scope is not a start'
+    end
+  end
+
+  test 'can get finish events' do
+    assert_not_empty ListenEvent.finish_events
+    ListenEvent.finish_events.each do |event|
+      assert event.is_finish?, 'event in start_events scope is not a start'
+    end
+  end
+
 end

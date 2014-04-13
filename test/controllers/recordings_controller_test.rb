@@ -55,6 +55,7 @@ class RecordingsControllerTest < ActionController::TestCase
   end
 
   test "should finish listening" do
+    @recording.start_listening # make sure listening before stop
     assert_difference('ListenEvent.count', 1) do
       post :finish_listening, id: @recording
     end
@@ -80,10 +81,21 @@ class RecordingsControllerTest < ActionController::TestCase
     end
     assert_redirected_to recording_path(assigns(:recording))
     get :show, id: @recording
-    assert @recording.listening?
+    assert assigns(:recording).listening?, 'must be listening to expect finish button'
     assert_response :success
     assert_select 'div.actions' do
       assert_select '[value=?]', 'Finish Listening'
+    end
+  end
+
+  test "shows listening recordings" do
+    @recording.start_listening # make sure we're listening to something
+    get :index, listening: true
+    assert_response :success
+    assert assigns(:recordings), 'should assign @recordings'
+    assert_not_empty assigns(:recordings), 'must have one listening recording'
+    assigns(:recordings).each do |recording|
+      assert recording.listening?, 'requested listening recordings but found one not listening'
     end
   end
 

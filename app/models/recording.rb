@@ -2,11 +2,17 @@ class Recording < ActiveRecord::Base
   belongs_to :concert
   has_many :listen_events, :dependent => :destroy
   scope :by_concert, lambda{|c| where(:concert_id => c)}
+  scope :by_listening, lambda{|l| where(listening: l)}
+  scope :listening, lambda{ by_listening(true)}
+  scope :not_listening, lambda{ by_listening(false)}
+
   validates :title, :presence => true
 
   def start_listening
     # if the last event is a start_listening fail
-    if listen_events.empty? || listen_events.last.is_finish?
+    unless listening?
+      self.listening = true
+      save
       listen_event = ListenEvent.start_event
       listen_events << listen_event
       listen_event
@@ -18,7 +24,9 @@ class Recording < ActiveRecord::Base
   end
 
   def finish_listening
-    if listen_events.empty? || listen_events.last.is_start?
+    if listening?
+      self.listening = false
+      save
       listen_event = ListenEvent.finish_event
       listen_events << listen_event
       listen_event
@@ -29,8 +37,7 @@ class Recording < ActiveRecord::Base
   end
 
   def listening?
-    return false if listen_events.empty?
-    listen_events.last.is_start?
+    listening
   end
 
 end
