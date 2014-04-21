@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140421013848) do
+ActiveRecord::Schema.define(version: 20140421014831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,13 @@ ActiveRecord::Schema.define(version: 20140421013848) do
   end
 
   create_table "concerts", force: true do |t|
-    t.string   "performer"
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "artist_id"
   end
+
+  add_index "concerts", ["artist_id"], name: "index_concerts_on_artist_id", using: :btree
 
   create_table "listen_events", force: true do |t|
     t.integer  "event_type"
