@@ -18,7 +18,7 @@ class ConcertsControllerTest < ActionController::TestCase
 
   test "should create concert" do
     assert_difference('Concert.count') do
-      post :create, concert: { date: @concert.date, performer: @concert.performer }
+      post :create, concert: { date: @concert.date, artist_id: @concert.artist_id }
     end
 
     assert_redirected_to concert_path(assigns(:concert))
@@ -35,7 +35,7 @@ class ConcertsControllerTest < ActionController::TestCase
   end
 
   test "should update concert" do
-    patch :update, id: @concert, concert: { date: @concert.date, performer: @concert.performer }
+    patch :update, id: @concert, concert: { date: @concert.date, artist_id: @concert.artist_id}
     assert_redirected_to concert_path(assigns(:concert))
   end
 

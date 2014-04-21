@@ -5,7 +5,12 @@ class Concert < ActiveRecord::Base
   validates_presence_of :artist
 
   def performer
-    artist.name
+    if artist
+      artist.name
+    else
+      ''
+    end
+
   end
 
   def title
