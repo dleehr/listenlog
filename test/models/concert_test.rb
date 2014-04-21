@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class ConcertTest < ActiveSupport::TestCase
-  test 'validates performer' do
+  test 'validates artist' do
     concert = Concert.new()
-    assert_not concert.save, 'should not save without performer'
+    assert_not concert.save, 'should not save without artist'
   end
 end
