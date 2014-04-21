@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 atlanta:
-  performer: Pearl Jam
+  artist: :pj
   date: 1994-04-03
 
 la:
-  performer: Pearl Jam
+  artist: :pj
   date: 2013-11-24

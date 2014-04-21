@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ArtistsControllerTest < ActionController::TestCase
   setup do
-    @artist = artists(:one)
+    @artist = artists(:pj)
   end
 
   test "should get index" do
