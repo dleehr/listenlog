@@ -62,6 +62,39 @@ class RecordingsControllerTest < ActionController::TestCase
     assert_redirected_to recording_path(assigns(:recording))
   end
 
+  test "should pause listening" do
+    @recording.start_listening # make sure listening before pause
+    assert_difference('ListenEvent.count', 1) do
+      post :pause_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+    assert_not assigns(:recording).listening
+  end
+
+  test "should not pause while stopped" do
+    @recording.finish_listening
+    assert_no_difference('ListenEvent.count') do
+      post :pause_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should resume listening" do
+    @recording.pause_listening
+    assert_difference('ListenEvent.count', 1) do
+      post :resume_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should not resume unless paused" do
+    @recording.start_listening
+    assert_no_difference('ListenEvent.count') do
+      post :resume_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
   test "shows recordings in concert" do
     get :index, :concert => @recording.concert.id
     assert_response :success
