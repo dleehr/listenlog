@@ -96,6 +96,24 @@ class RecordingsController < ApplicationController
     end
   end
 
+  # POST /recordings/1/pause_listening
+  # POST /recordings/1/pause_listening.json
+  def pause_listening
+    # TODO: refactor out common listen event logic.
+    listen_event = @recording.pause_listening
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Paused listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to pause listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # leaving off here
+  # TODO: Write resume_listening
 
   private
     # Use callbacks to share common setup or constraints between actions.
