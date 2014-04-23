@@ -27,4 +27,16 @@ class ListenEventTest < ActiveSupport::TestCase
     end
   end
 
+  test 'can create pause event' do
+    ev = ListenEvent.pause_event
+    assert ev.is_pause?
+    assert_not ev.is_start?
+  end
+
+  test 'can create resume event' do
+    ev = ListenEvent.resume_event
+    assert ev.is_resume?
+    assert_not ev.is_pause?
+  end
+
 end
