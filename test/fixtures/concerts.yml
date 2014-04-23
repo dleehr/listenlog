@@ -3,7 +3,9 @@
 atlanta:
   artist: :pj
   date: 1994-04-03
+  location: Atlanta, GA
 
 la:
   artist: :pj
   date: 2013-11-24
+  location: Los Angeles, CA
