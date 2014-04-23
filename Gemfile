@@ -47,3 +47,5 @@ end
 group :test do
   gem 'rake'
 end
+
+gem 'capybara', '~> 2.2.1'
