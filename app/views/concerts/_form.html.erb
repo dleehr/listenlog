@@ -19,6 +19,10 @@
     <%= f.label :date %><br>
     <%= f.date_select :date, :start_year => 1990, :end_year => Date.today.year %>
   </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

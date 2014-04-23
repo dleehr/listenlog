@@ -65,4 +65,9 @@ class ConcertsControllerTest < ActionController::TestCase
       assert_select 'option', '1990'
     end
   end
+
+  test "should show location" do
+    get :show, id: @concert
+    assert_select 'span.location', @concert.location
+  end
 end

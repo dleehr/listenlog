@@ -5,6 +5,7 @@
     <tr>
       <th>Performer</th>
       <th>Date</th>
+      <th>Location</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= concert.performer %></td>
         <td><%= concert.date %></td>
+        <td><%= concert.location %></td>
         <td><%= link_to 'Show', concert %></td>
         <td><%= link_to 'Edit', edit_concert_path(concert) %></td>
         <td><%= link_to 'Destroy', concert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
