@@ -49,3 +49,4 @@ group :test do
 end
 
 gem 'capybara', '~> 2.2.1'
+gem 'coveralls', require: false
