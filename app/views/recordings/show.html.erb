@@ -20,6 +20,6 @@
   <% end %>
 </p>
 
-
+<%= link_to 'Events', listen_events_path(:recording => @recording.id) %>
 <%= link_to 'Edit', edit_recording_path(@recording) %> |
 <%= link_to 'Back', recordings_path %>
