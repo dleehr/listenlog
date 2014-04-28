@@ -6,6 +6,7 @@ class RecordingsShowEventsTest < ActionDispatch::IntegrationTest
     visit(recording_path(recordings(:ob_la)))
     assert page.has_link? 'Events', "Page should have 'Events' link"
     click_link 'Events'
-    assert page.has_link? recording_path(recordings(:ob_la)), 'Unable to find link back to recording from events list'
+    listen_event = recordings(:ob_la).listen_events.first
+    assert page.has_link?('Show', :href => listen_event_path(listen_event)), 'Page should have a link to the listen event'
   end
 end
