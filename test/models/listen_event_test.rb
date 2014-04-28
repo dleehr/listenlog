@@ -27,4 +27,11 @@ class ListenEventTest < ActiveSupport::TestCase
     end
   end
 
+  test 'can get events by age' do
+    assert_not_empty ListenEvent.by_age, 'Unable to get any events by age'
+    assert ListenEvent.count >= 2, 'Need at least 2 events to compare by age'
+    oldest = ListenEvent.by_age.first
+    newest = ListenEvent.by_age.last
+    assert oldest.created_at < newest.created_at, 'creation date of oldest event is not before creation date of newest'
+  end
 end
