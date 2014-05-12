@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class CreateThingsTest < ActionDispatch::IntegrationTest
+  setup do
+    Capybara.current_driver = Capybara.javascript_driver
+  end
   test 'Create an artist' do
     visit(artists_path)
     click_link('New Artist')
@@ -23,5 +26,4 @@ class CreateThingsTest < ActionDispatch::IntegrationTest
     assert page.has_content? 'successfully'
     assert page.has_content? '1999-12-31'
   end
-
 end
