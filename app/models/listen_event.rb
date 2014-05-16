@@ -16,12 +16,12 @@ class ListenEvent < ActiveRecord::Base
     event_type == FINISH
   end
 
-  def self.start_event
-    new(:event_type => START)
+  def self.start_event(note=nil)
+    new(:event_type => START, :note => note)
   end
 
-  def self.finish_event
-    new(:event_type => FINISH)
+  def self.finish_event(note=nil)
+    new(:event_type => FINISH, :note => note)
   end
 
 end

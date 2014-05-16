@@ -1,6 +1,6 @@
 class Recording < ActiveRecord::Base
   belongs_to :concert
-  has_many :listen_events, :dependent => :destroy
+  has_many :listen_events, -> { order('created_at ASC') }, :dependent => :destroy
   scope :by_concert, lambda{|c| where(:concert_id => c)}
   scope :by_listening, lambda{|l| where(listening: l)}
   scope :listening, lambda{ by_listening(true)}
@@ -8,11 +8,11 @@ class Recording < ActiveRecord::Base
 
   validates :title, :presence => true
 
-  def start_listening
+  def start_listening(note=nil)
     unless listening?
       self.listening = true
       save
-      listen_event = ListenEvent.start_event
+      listen_event = ListenEvent.start_event(note)
       listen_events << listen_event
       listen_event
     else
@@ -22,11 +22,11 @@ class Recording < ActiveRecord::Base
 
   end
 
-  def finish_listening
+  def finish_listening(note=nil)
     if listening?
       self.listening = false
       save
-      listen_event = ListenEvent.finish_event
+      listen_event = ListenEvent.finish_event(note)
       listen_events << listen_event
       listen_event
     else
@@ -37,6 +37,10 @@ class Recording < ActiveRecord::Base
 
   def listening?
     listening
+  end
+
+  def last_event
+    listen_events.last
   end
 
 end

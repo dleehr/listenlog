@@ -18,9 +18,8 @@ class ListenEventsControllerTest < ActionController::TestCase
 
   test "should create listen_event" do
     assert_difference('ListenEvent.count') do
-      post :create, listen_event: { recording_id: @listen_event.recording_id, event_type: @listen_event.event_type}
+      post :create, listen_event: { recording_id: @listen_event.recording_id, event_type: @listen_event.event_type, note: 'note here'}
     end
-
     assert_redirected_to listen_event_path(assigns(:listen_event))
   end
 

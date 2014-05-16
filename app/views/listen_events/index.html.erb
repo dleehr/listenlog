@@ -5,6 +5,7 @@
     <tr>
       <th>Type</th>
       <th>Recording</th>
+      <th>Note</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= listen_event.event_type %></td>
         <td><%= listen_event.recording_id %></td>
+        <td><%= listen_event.note %></td>
         <td><%= link_to 'Show', listen_event %></td>
         <td><%= link_to 'Edit', edit_listen_event_path(listen_event) %></td>
         <td><%= link_to 'Destroy', listen_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,0 +1,9 @@
+<span class="last_event">
+  <% if event.is_start? %>
+  Started at
+  <% elsif event.is_finish? %>
+  Finished at
+  <% end %>
+  <%= event.created_at %>
+  <span class="note"><%= event.note %></span>
+ </span>

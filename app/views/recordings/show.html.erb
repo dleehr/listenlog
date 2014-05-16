@@ -19,6 +19,12 @@
     <%= render 'start_listening' %>
   <% end %>
 </p>
+<p>
+  <strong>Last Event:</strong>
+  <% if @recording.last_event %>
+    <%= render partial: 'last_event', locals: {event: @recording.last_event} %>
+  <% end %>
+</p>
 
 <%= link_to 'Events', listen_events_path(:recording => @recording.id) %>
 <%= link_to 'Edit', edit_recording_path(@recording) %> |
