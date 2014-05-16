@@ -5,12 +5,14 @@ class ListenEventTest < ActiveSupport::TestCase
     ev = ListenEvent.start_event
     assert ev.is_start?, 'event is not a start event'
     assert_not ev.is_finish?, 'event is a finish event'
+    assert_nil ev.note, 'event should not have note'
   end
 
   test 'can create finish event' do
     ev = ListenEvent.finish_event
     assert ev.is_finish?, 'event is not a finish event'
     assert_not ev.is_start?, 'event is a start event'
+    assert_nil ev.note, 'event should not have note'
   end
 
   test 'can get start events' do
@@ -34,4 +36,21 @@ class ListenEventTest < ActiveSupport::TestCase
     newest = ListenEvent.by_age.last
     assert oldest.created_at < newest.created_at, 'creation date of oldest event is not before creation date of newest'
   end
+
+  test 'can create start event with note' do
+    note = 'Some Song Name'
+    ev = ListenEvent.start_event(note)
+    assert ev.is_start?, 'event is not a start event'
+    assert_not ev.is_finish?, 'event is a finish event'
+    assert_equal(note, ev.note, 'event did not accept note')
+  end
+
+  test 'can create finish event with note' do
+    note = 'Some Song Name 2'
+    ev = ListenEvent.finish_event(note)
+    assert ev.is_finish?, 'event is not a finish event'
+    assert_not ev.is_start?, 'event is a start event'
+    assert_equal(note, ev.note, 'event did not accept note')
+  end
+
 end
