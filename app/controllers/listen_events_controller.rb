@@ -73,6 +73,6 @@ class ListenEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listen_event_params
-      params.require(:listen_event).permit(:type, :recording_id)
+      params.require(:listen_event).permit(:type, :recording_id, :note)
     end
 end

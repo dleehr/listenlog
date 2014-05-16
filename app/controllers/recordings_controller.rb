@@ -69,7 +69,7 @@ class RecordingsController < ApplicationController
   # POST /recordings/1/start_listening
   # POST /recordings/1/start_listening.json
   def start_listening
-    listen_event = @recording.start_listening
+    listen_event = @recording.start_listening(params[:note])
     respond_to do |format|
       if listen_event
         format.html { redirect_to @recording, notice: 'Started listening' }
@@ -84,7 +84,7 @@ class RecordingsController < ApplicationController
   # POST /recordings/1/finish_listening
   # POST /recordings/1/finish_listening.json
   def finish_listening
-    listen_event = @recording.finish_listening
+    listen_event = @recording.finish_listening(params[:note])
     respond_to do |format|
       if listen_event
         format.html { redirect_to @recording, notice: 'Finished listening' }

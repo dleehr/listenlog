@@ -10,5 +10,10 @@
   <%= @listen_event.recording_id %>
 </p>
 
+<p>
+  <strong>Note:</strong>
+  <%= @listen_event.note %>
+</p>
+
 <%= link_to 'Edit', edit_listen_event_path(@listen_event) %> |
 <%= link_to 'Back', listen_events_path %>

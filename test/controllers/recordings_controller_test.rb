@@ -62,6 +62,16 @@ class RecordingsControllerTest < ActionController::TestCase
     assert_redirected_to recording_path(assigns(:recording))
   end
 
+  test "should finish listening with note" do
+    @recording.start_listening # make sure listening before stop
+    note = 'Done with this one'
+    assert_difference('ListenEvent.count', 1) do
+      post :finish_listening, id: @recording, note: note
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+    assert_equal note, assigns(:recording).last_event.note, 'event should have note'
+  end
+
   test "shows recordings in concert" do
     get :index, :concert => @recording.concert.id
     assert_response :success
