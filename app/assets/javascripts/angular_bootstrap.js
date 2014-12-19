@@ -3,5 +3,7 @@
 
 //= require angular
 //= require angular-animate
+//= require angular-route
 //= require angular-resource
 //= require angular-ui-bootstrap
+//= require_tree ./angular
