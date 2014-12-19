@@ -1,0 +1,2 @@
+module AngularBootstrapHelper
+end
