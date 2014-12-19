@@ -1,22 +1,32 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-5">show</div>
-    <div class="col-md-1">|</div>
-    <div class="col-md-6">recording</div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
       <div class="row">
-        <div class="col-md-6">Artist</div>
-        <div class="col-md-6">Song</div>
+        <h3 class="panel-title col-xs-6">Show</h3>
+        <div class="panel-subtitle col-xs-6">Recording</div>
       </div>
-      <div class="row">
-        <div class="col-md-6">Date</div>
-        <div class="col-md-6">Start</div>
+    </div>
+    <div class="panel-body">
+      <div class="row listenlog body">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6 artist">Artist</div>
+            <div class="col-xs-6 song">Song</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 date">Date</div>
+            <div class="col-xs-6 buttons">
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="fa fa-play" aria-hidden="true"></span> Start
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <!--
 
  +----------------+-------------+
