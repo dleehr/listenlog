@@ -52,3 +52,5 @@ gem 'capybara', '~> 2.2.1'
 gem 'coveralls', require: false
 gem 'selenium-webdriver', :require => false
 gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+
