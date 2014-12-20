@@ -16,9 +16,19 @@
           <div class="row">
             <div class="col-sm-6 date">{{ current.concert.date || '&nbsp;' }}</div>
             <div class="col-sm-6 buttons">
-              <button type="button" class="btn btn-default btn-sm" ng-click="current.buttonClicked()">
-                <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text || '&nbsp;' }}
-              </button>
+                <div class="row">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default btn-sm form-control" ng-click="current.toggle()">
+                                <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text() || '&nbsp;' }}
+                            </button>
+                            <span ng-hide="current.isCollapsed">
+                                <input type="text" ng-model="current.note" class="form-control">
+                                <button type="button" class="btn btn-sm btn-primary form-control" ng-click="current.submit()">{{ current.action_text }}</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
           </div>
         </div>

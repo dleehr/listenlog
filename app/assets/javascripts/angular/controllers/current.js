@@ -11,6 +11,7 @@ function CurrentController(Concert, Artist, Recording, ListenEvent) {
     this.ListenEvent = ListenEvent;
     this.loadConcerts();
     this.reload();
+    this.isCollapsed = true;
 }
 
 CurrentController.prototype.loadConcerts = function () {
@@ -37,24 +38,46 @@ CurrentController.prototype.listening = function() {
 CurrentController.prototype.updateButton = function() {
     if(this.listening()) {
         this.button_class = 'fa-stop';
-        this.button_text = 'Stop';
+        this.action_text = 'Stop';
 
     } else {
         this.button_class = 'fa-play';
-        this.button_text = 'Start';
+        this.action_text = 'Start';
     }
 };
 
-CurrentController.prototype.buttonClicked = function() {
+CurrentController.prototype.button_text = function() {
+    if(this.isCollapsed) {
+        return this.action_text;
+    } else {
+        return 'Cancel';
+    }
+};
+
+CurrentController.prototype.submit = function() {
+    this.isCollapsed = true;
     var recordingId = this.recording.id;
     var controllerThis = this;
     if(this.listening()) {
-        this.recording.$finishListening({id:recordingId}, function() {
+        this.recording.$finishListening({id:recordingId,note:this.note}, function() {
             controllerThis.reload();
         });
     } else {
-        this.recording.$startListening({id:recordingId}, function() {
+        this.recording.$startListening({id:recordingId,note:this.note}, function() {
             controllerThis.reload();
         });
+    }};
+
+CurrentController.prototype.updateDefaultNote = function() {
+    if(this.listening()) {
+        this.note = 'Finished';
+    } else {
+        this.note = 'Started';
     }
+};
+
+CurrentController.prototype.toggle = function() {
+    // set the default action
+    this.updateDefaultNote();
+    this.isCollapsed = !this.isCollapsed;
 };
