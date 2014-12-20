@@ -2,22 +2,22 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <div class="row">
-        <h3 class="panel-title col-sm-6">{{ current.show }}</h3>
-        <div class="panel-subtitle col-sm-6">{{ current.recording.title }}</div>
+        <h3 class="panel-title col-sm-6">{{ current.show || '&nbsp;' }}</h3>
+        <div class="panel-subtitle col-sm-6">{{ current.recording.title || '&nbsp;' }}</div>
       </div>
     </div>
     <div class="panel-body">
       <div class="row listenlog body">
         <div class="col-sm-12">
           <div class="row">
-            <div class="col-sm-6 artist">{{ current.artist.name }}</div>
-            <div class="col-sm-6 song">{{ current.song }}</div>
+            <div class="col-sm-6 artist">{{ current.artist.name || '&nbsp;' }}</div>
+            <div class="col-sm-6 song">{{ current.song || '&nbsp;' }}</div>
           </div>
           <div class="row">
-            <div class="col-sm-6 date">{{ current.concert.date }}</div>
+            <div class="col-sm-6 date">{{ current.concert.date || '&nbsp;' }}</div>
             <div class="col-sm-6 buttons">
               <button type="button" class="btn btn-default btn-sm" ng-click="current.buttonClicked()">
-                <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text}}
+                <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text || '&nbsp;' }}
               </button>
             </div>
           </div>
