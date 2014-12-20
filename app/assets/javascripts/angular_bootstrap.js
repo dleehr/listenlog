@@ -5,4 +5,5 @@
 //= require angular-animate
 //= require angular-resource
 //= require angular-ui-bootstrap
+//= require angular-ui-bootstrap-tpls
 //= require_tree ./angular
