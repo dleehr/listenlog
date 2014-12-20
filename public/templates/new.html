@@ -1,0 +1,72 @@
+<div class="container" ng-controller="NewController as new">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+                <h3 class="panel-title">Start Listening</h3>
+            <p>{{ new.concert }}</p>
+        </div>
+        <div class="panel-body">
+            <div class="row listenlog body">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-inline">
+                            <!-- Artist -->
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="artist">Artist:</label>
+                            </div>
+                            <div class="form-group">
+                                <select
+                                        id="artist"
+                                        class="form-control col-sm-2"
+                                        ng-model="new.concert.artist_id"
+                                        ng-options="artist.id as artist.name for artist in new.artists">
+                                    <option value="">-- Choose --</option>
+                                </select>
+                            </div>
+                            <!-- Date -->
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="date">Date:</label>
+                            </div>
+                            <div class="input-group">
+                                <input id="date"
+                                       type="text"
+                                       class="form-control col-sm-2 c"
+                                       datepicker-popup="'yyyy-MM-dd"
+                                       ng-model="new.concert.date"
+                                       is-open="new.datePickerOpened"
+                                       min-date="1900-01-01"
+                                       ng-required="true"
+                                       close-text="Close" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="new.openDatePicker($event)"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                            </div>
+                            <!-- Location -->
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="location">Location:</label>
+                            </div>
+                            <div class="form-group">
+                                <input id="location"
+                                        ng-model="new.concert.location"
+                                        class="form-control">
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-inline col-sm-12">
+                            <div class="form-group">
+                                <label>Recording:
+                                    <input ng-model="new.recording.title" class="form-control">
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-default btn-sm form-control" ng-click="new.start">
+                                <span class="fa fa-play" aria-hidden="true"></span> Start
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
