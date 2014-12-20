@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-sm-6 date">{{ current.concert.date }}</div>
             <div class="col-sm-6 buttons">
-              <button type="button" class="btn btn-default btn-sm">
+              <button type="button" class="btn btn-default btn-sm" ng-click="current.buttonClicked()">
                 <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text}}
               </button>
             </div>
