@@ -53,4 +53,10 @@ class ListenEventTest < ActiveSupport::TestCase
     assert_equal(note, ev.note, 'event did not accept note')
   end
 
+  test 'can get last listen event' do
+    last = ListenEvent.last
+    last_by_age = ListenEvent.by_age.last
+    assert_equal(last, last_by_age, 'last mismatch')
+  end
+
 end

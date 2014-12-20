@@ -53,4 +53,10 @@ class ListenEventsControllerTest < ActionController::TestCase
     assert_includes assigns(:listen_events), @listen_event
   end
 
+  test "shows last event" do
+    get :last
+    assert_response :success
+    assert_not_nil assigns(:listen_event)
+  end
+
 end

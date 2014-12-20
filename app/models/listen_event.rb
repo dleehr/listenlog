@@ -24,4 +24,8 @@ class ListenEvent < ActiveRecord::Base
     new(:event_type => FINISH, :note => note)
   end
 
+  def self.last
+    self.by_age.last
+  end
+
 end

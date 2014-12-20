@@ -16,6 +16,13 @@ class ListenEventsController < ApplicationController
   def show
   end
 
+  # GET /listen_events/last
+  # GET /listen_events/last.json
+  def last
+    @listen_event = ListenEvent.last
+    render :show
+  end
+
   # GET /listen_events/new
   def new
     @listen_event = ListenEvent.new
