@@ -47,9 +47,14 @@ CurrentController.prototype.updateButton = function() {
 
 CurrentController.prototype.buttonClicked = function() {
     var recordingId = this.recording.id;
+    var controllerThis = this;
     if(this.listening()) {
-        this.recording.$finishListening({id:recordingId}, this.reload);
+        this.recording.$finishListening({id:recordingId}, function() {
+            controllerThis.reload();
+        });
     } else {
-        this.recording.$startListening({id:recordingId}, this.reload);
+        this.recording.$startListening({id:recordingId}, function() {
+            controllerThis.reload();
+        });
     }
 };
