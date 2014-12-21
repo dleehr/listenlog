@@ -1,68 +1,63 @@
 <div class="container" ng-controller="NewController as new">
     <div class="panel panel-primary">
         <div class="panel-heading">
-                <h3 class="panel-title">Start Listening</h3>
+            <h3 class="panel-title">Start Listening</h3>
             <p>{{ new.concert }}</p>
+            <p>{{ new.recording }}</p>
         </div>
         <div class="panel-body">
-            <div class="row listenlog body">
+            <div class="row listenlog body form">
                 <div class="col-sm-12">
-                        <div class="form-inline row">
-                            <!-- Artist -->
-                            <div class="form-group">
-                                <label class="control-label col-sm-1" for="artist">Artist:</label>
-                            </div>
-                            <div class="form-group">
-                                <select
-                                        id="artist"
-                                        class="form-control col-sm-3"
-                                        ng-model="new.concert.artist_id"
-                                        ng-options="artist.id as artist.name for artist in new.artists">
-                                    <option value="">-- Choose --</option>
-                                </select>
-                            </div>
-                            <!-- Date -->
-                            <div class="form-group">
-                                <label class="control-label col-sm-1" for="date">Date:</label>
-                            </div>
-                            <div class="form-group">
+                    <div class="row">
+                        <!-- Artist -->
+                        <div class="form-group col-sm-4">
+                            <label class="control-label" for="artist">Artist</label>
+                            <select
+                                    id="artist"
+                                    class="form-control"
+                                    ng-model="new.concert.artist_id"
+                                    ng-options="artist.id as artist.name for artist in new.artists">
+                                <option value="">-- Choose --</option>
+                            </select>
+                        </div>
+                        <!-- Date -->
+                        <div class="form-group col-sm-4">
+                            <label class="control-label" for="date">Date</label>
                             <div class="input-group">
                                 <input id="date"
-                                       type="text"
-                                       class="form-control col-sm-3"
-                                       datepicker-popup="'yyyy-MM-dd"
-                                       ng-model="new.concert.date"
-                                       is-open="new.datePickerOpened"
-                                       min-date="1900-01-01"
-                                       ng-required="true"
-                                       close-text="Close" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="new.openDatePicker($event)"><i class="fa fa-calendar"></i></button>
-                                        </span>
+                                   type="text"
+                                   class="form-control"
+                                   datepicker-popup="'yyyy-MM-dd"
+                                   ng-model="new.concert.date"
+                                   is-open="new.datePickerOpened"
+                                   min-date="1900-01-01"
+                                   ng-required="true"
+                                   close-text="Close" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="new.openDatePicker($event)"><i class="fa fa-calendar"></i></button>
+                              </span>
                             </div>
-                            </div>
-                            <!-- Location -->
-                            <div class="form-group">
-                                <label class="control-label col-sm-1" for="location">Location:</label>
-                            </div>
-                            <div class="form-group">
-                                <input id="location"
-                                        ng-model="new.concert.location"
-                                        class="form-control col-sm-3">
-                            </div>
-                    </div>
+                        </div>
+                        <!-- Location -->
+                        <div class="form-group col-sm-4">
+                            <label class="control-label" for="location">Location</label>
+                            <input id="location"
+                                   ng-model="new.concert.location"
+                                   class="form-control">
+                        </div>
+                    </div><!-- /row -->
                     <div class="row">
-                        <div class="form-inline col-sm-12">
-                            <div class="form-group">
-                                <label>Recording:
-                                    <input ng-model="new.recording.title" class="form-control">
-                                </label>
-                            </div>
-                            <button type="button" class="btn btn-default btn-sm form-control" ng-click="new.start">
+                        <div class="form-group col-sm-6">
+                            <label class="control-label" for="recording">Recording</label>
+                            <input id="recording" ng-model="new.recording.title" class="form-control" />
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Create & Start</label>
+                            <button type="button" class="btn btn-success btn-sm form-control" ng-click="new.start()">
                                 <span class="fa fa-play" aria-hidden="true"></span> Start
                             </button>
                         </div>
-                    </div>
+                    </div><!-- /row -->
                 </div>
             </div>
         </div>
