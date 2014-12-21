@@ -26,7 +26,7 @@ class Recording < ActiveRecord::Base
     if listening?
       self.listening = false
       save
-      listen_event = ListenEvent.finish_event(note)
+      listen_event = ListenEvent.stop_event(note)
       listen_events << listen_event
       listen_event
     else

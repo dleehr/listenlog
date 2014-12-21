@@ -4,13 +4,13 @@ class ListenEventTest < ActiveSupport::TestCase
   test 'can create start event' do
     ev = ListenEvent.start_event
     assert ev.is_start?, 'event is not a start event'
-    assert_not ev.is_finish?, 'event is a finish event'
+    assert_not ev.is_stop?, 'event is a finish event'
     assert_nil ev.note, 'event should not have note'
   end
 
-  test 'can create finish event' do
-    ev = ListenEvent.finish_event
-    assert ev.is_finish?, 'event is not a finish event'
+  test 'can create stop event' do
+    ev = ListenEvent.stop_event
+    assert ev.is_stop?, 'event is not a stop event'
     assert_not ev.is_start?, 'event is a start event'
     assert_nil ev.note, 'event should not have note'
   end
@@ -22,10 +22,10 @@ class ListenEventTest < ActiveSupport::TestCase
     end
   end
 
-  test 'can get finish events' do
-    assert_not_empty ListenEvent.finish_events
-    ListenEvent.finish_events.each do |event|
-      assert event.is_finish?, 'event in start_events scope is not a start'
+  test 'can get stop events' do
+    assert_not_empty ListenEvent.stop_events
+    ListenEvent.stop_events.each do |event|
+      assert event.is_stop?, 'event in start_events scope is not a start'
     end
   end
 
@@ -41,14 +41,14 @@ class ListenEventTest < ActiveSupport::TestCase
     note = 'Some Song Name'
     ev = ListenEvent.start_event(note)
     assert ev.is_start?, 'event is not a start event'
-    assert_not ev.is_finish?, 'event is a finish event'
+    assert_not ev.is_stop?, 'event is a finish event'
     assert_equal(note, ev.note, 'event did not accept note')
   end
 
-  test 'can create finish event with note' do
+  test 'can create stop event with note' do
     note = 'Some Song Name 2'
-    ev = ListenEvent.finish_event(note)
-    assert ev.is_finish?, 'event is not a finish event'
+    ev = ListenEvent.stop_event(note)
+    assert ev.is_stop?, 'event is not a finish event'
     assert_not ev.is_start?, 'event is a start event'
     assert_equal(note, ev.note, 'event did not accept note')
   end
