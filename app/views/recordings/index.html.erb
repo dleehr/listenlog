@@ -16,7 +16,7 @@
     <% @recordings.each do |recording| %>
       <tr>
         <td><%= recording.title %></td>
-        <td><%= recording.concert.title %></td>
+        <td><%= recording.concert.title if recording.concert %></td>
         <td><%= recording.listening? %></td>
         <td><%= link_to 'Show', recording %></td>
         <td><%= link_to 'Edit', edit_recording_path(recording) %></td>
