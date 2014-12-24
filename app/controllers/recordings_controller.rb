@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy, :start_listening, :finish_listening]
+  before_action :set_recording, only: [:show, :edit, :update, :destroy, :start_listening, :pause_listening, :resume_listening, :finish_listening]
   # GET /recordings
   # GET /recordings.json
   def index

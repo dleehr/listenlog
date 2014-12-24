@@ -6,6 +6,8 @@ Listenlog::Application.routes.draw do
   resources :recordings do
     member do
       post 'start_listening'
+      post 'pause_listening'
+      post 'resume_listening'
       post 'finish_listening'
     end
   end

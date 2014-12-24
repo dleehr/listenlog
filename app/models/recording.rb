@@ -17,7 +17,7 @@ class Recording < ActiveRecord::Base
   end
 
   def resume_listening(note=nil)
-    create_event(:resume_event, true, note)
+    create_event(:resume_event, false, note)
   end
 
   def finish_listening(note=nil)

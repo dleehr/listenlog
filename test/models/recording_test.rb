@@ -6,6 +6,13 @@ class RecordingTest < ActiveSupport::TestCase
     assert r.start_listening, 'could not start listening'
   end
 
+  test 'can pause listening' do
+    r = Recording.create(:title => 'Test pause Recording')
+    assert r.start_listening, 'Could not start listening'
+    assert r.listening?, 'should be listening'
+    assert r.pause_listening, 'Could not pause listening'
+  end
+
   test 'can finish listening after starting' do
     r = Recording.create(:title => 'Test Recording2')
     assert r.start_listening, 'could not start listening'
@@ -13,6 +20,17 @@ class RecordingTest < ActiveSupport::TestCase
     assert r.finish_listening, 'could not stop listening'
     assert_not r.listening?, 'should not be listening?'
   end
+
+  test 'can resume listening' do
+    r = Recording.create(:title => 'Test pause Recording')
+    assert r.start_listening, 'Could not start listening'
+    assert r.listening?, 'should be listening'
+    assert r.pause_listening, 'Could not pause listening'
+    assert_not r.listening?, 'should not be listening'
+    assert r.resume_listening, 'could not resume'
+    assert r.listening?, 'should be listening'
+  end
+
   test 'cannot save without title' do
     r = Recording.new
     assert_not r.save, 'should not save without a file'
