@@ -32,7 +32,7 @@ CurrentController.prototype.reload = function() {
 };
 
 CurrentController.prototype.listening = function() {
-    return this.lastListenEvent['is_start?'] == true;
+    return this.recording['listening'] == true;
 };
 
 CurrentController.prototype.updateButton = function() {
@@ -58,12 +58,13 @@ CurrentController.prototype.submit = function() {
     this.isCollapsed = true;
     var recordingId = this.recording.id;
     var controllerThis = this;
+    // Determine if pause, resume, or finish
     if(this.listening()) {
-        this.recording.$finishListening({id:recordingId,note:this.note}, function() {
+        this.recording.$pauseListening({id:recordingId,note:this.note}, function() {
             controllerThis.reload();
         });
     } else {
-        this.recording.$startListening({id:recordingId,note:this.note}, function() {
+        this.recording.$resumeListening({id:recordingId,note:this.note}, function() {
             controllerThis.reload();
         });
     }};

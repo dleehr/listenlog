@@ -7,6 +7,8 @@ angular.module('listenlog.resources.models',['ngResource'])
         return $resource('/recordings/:id/:action.json', {},
             {
                 startListening: { method: 'POST', params: { action: 'start_listening' }},
+                pauseListening: { method: 'POST', params: { action: 'pause_listening' }},
+                resumeListening: { method: 'POST', params: { action: 'resume_listening' }},
                 finishListening: { method: 'POST', params: { action: 'finish_listening' }}
             }
         );
