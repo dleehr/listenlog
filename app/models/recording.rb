@@ -9,30 +9,19 @@ class Recording < ActiveRecord::Base
   validates :title, :presence => true
 
   def start_listening(note=nil)
-    unless listening?
-      self.listening = true
-      save
-      listen_event = ListenEvent.start_event(note)
-      listen_events << listen_event
-      listen_event
-    else
-      errors.add(:listen_events, "Listening in progress, stop first")
-      nil
-    end
+    create_event(:start_event, false, note)
+  end
 
+  def pause_listening(note=nil)
+    create_event(:pause_event, true, note)
+  end
+
+  def resume_listening(note=nil)
+    create_event(:resume_event, true, note)
   end
 
   def finish_listening(note=nil)
-    if listening?
-      self.listening = false
-      save
-      listen_event = ListenEvent.stop_event(note)
-      listen_events << listen_event
-      listen_event
-    else
-      errors.add(:listen_events, "No listen in progress, cannot stop")
-      nil
-    end
+    create_event(:finish_event, true, note)
   end
 
   def listening?
@@ -41,6 +30,22 @@ class Recording < ActiveRecord::Base
 
   def last_event
     listen_events.last
+  end
+
+  private
+
+  def create_event(type, expected_listening, note=nil)
+    if listening? == expected_listening
+      self.listening = !expected_listening
+      save
+      listen_event = ListenEvent.send(type, note)
+      listen_events << listen_event
+      listen_event
+    else
+      errors.add(:listen_events, "Failed to create event,listening state should be #{expected_listening}.")
+      nil
+    end
+
   end
 
 end

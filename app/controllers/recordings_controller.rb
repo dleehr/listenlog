@@ -81,6 +81,36 @@ class RecordingsController < ApplicationController
     end
   end
 
+  # POST /recordings/1/pause_listening
+  # POST /recordings/1/pause_listening.json
+  def pause_listening
+    listen_event = @recording.pause_listening(params[:note])
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Paused listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to pause listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /recordings/1/resume_listening
+  # POST /recordings/1/resume_listening.json
+  def resume_listening
+    listen_event = @recording.resume_listening(params[:note])
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Resumed listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to resume listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /recordings/1/finish_listening
   # POST /recordings/1/finish_listening.json
   def finish_listening

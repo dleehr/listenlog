@@ -1,7 +1,7 @@
 <span class="last_event">
   <% if event.is_start? %>
   Started at
-  <% elsif event.is_stop? %>
+  <% elsif event.is_pause? %>
   Finished at
   <% end %>
   <%= event.created_at %>

@@ -5,6 +5,7 @@ class RecordingTest < ActiveSupport::TestCase
     r = Recording.create(:title => 'Test Recording')
     assert r.start_listening, 'could not start listening'
   end
+
   test 'can finish listening after starting' do
     r = Recording.create(:title => 'Test Recording2')
     assert r.start_listening, 'could not start listening'
