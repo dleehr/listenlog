@@ -4,7 +4,8 @@ class Recording < ActiveRecord::Base
   scope :by_concert, lambda{|c| where(:concert_id => c)}
   scope :by_listening, lambda{|l| where(listening: l)}
   scope :listening, lambda{ by_listening(true)}
-  scope :active, lambda{ where(active: true)}
+  scope :by_active, lambda{|a| where(active: a)}
+  scope :active, lambda{ by_active(true)}
   scope :not_listening, lambda{ by_listening(false)}
 
   validates :title, :presence => true

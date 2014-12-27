@@ -10,6 +10,9 @@ class RecordingsController < ApplicationController
     if params[:listening]
       @recordings = @recordings.by_listening(params[:listening])
     end
+    if params[:active]
+      @recordings = @recordings.by_active(params[:active])
+    end
   end
 
   # GET /recordings/1
