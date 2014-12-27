@@ -1,0 +1,6 @@
+<div class="container" ng-controller="HomeController as home">
+    <!-- Active Recordings -->
+    <div class="row" ng-repeat="recording in home.activeRecordings">
+        {{ recording.title }}
+    </div>
+</div>
