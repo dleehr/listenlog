@@ -1,6 +1,14 @@
 <div class="container" ng-controller="HomeController as home">
-    <!-- Active Recordings -->
-    <div class="row" ng-repeat="recording in home.activeRecordings">
-        {{ recording.title }}
-    </div>
+        <tabset class="row">
+            <tab heading="New recording">
+                <div class="row">&nbsp;</div>
+                <!-- New Recording -->
+                <div class="row" ng-include="'/templates/new.html'"></div>
+            </tab>
+            <tab heading="Active recordings">
+                <div class="row">&nbsp;</div>
+                <!-- Active Recordings -->
+                <div class="row" ng-repeat="recording in home.activeRecordings" ng-include="'/templates/current.html'"></div>
+            </tab>
+        </tabset>
 </div>
