@@ -41,17 +41,19 @@ CurrentController.prototype.listening = function() {
 };
 
 CurrentController.prototype.updateButton = function() {
+    // TODO: rework to pause/resume/finish
+    // array of buttons/actions
     if(this.listening()) {
-        this.button_class = 'fa-stop';
-        this.action_text = 'Stop';
+        this.buttonClass = 'fa-stop';
+        this.actionText = 'Stop';
 
     } else {
-        this.button_class = 'fa-play';
-        this.action_text = 'Start';
+        this.buttonClass= 'fa-play';
+        this.actionText = 'Start';
     }
 };
 
-CurrentController.prototype.button_text = function() {
+CurrentController.prototype.buttonText = function() {
     if(this.isCollapsed) {
         return this.action_text;
     } else {
