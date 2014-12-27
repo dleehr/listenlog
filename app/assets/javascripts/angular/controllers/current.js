@@ -9,16 +9,21 @@ function CurrentController(Concert, Artist, Recording, ListenEvent) {
     this.Artist = Artist;
     this.Recording = Recording;
     this.ListenEvent = ListenEvent;
-    this.loadConcerts();
-    this.reload();
     this.isCollapsed = true;
 }
+
+CurrentController.prototype.init = function(recording) {
+    this.recording = recording;
+    console.log("initialized with " + recording.title);
+    // Now populate things
+};
 
 CurrentController.prototype.loadConcerts = function () {
     this.concerts = this.Concert.query();
 };
 
 CurrentController.prototype.reload = function() {
+    // TODO: rework this to start with a recording
     var controllerThis = this;
     this.lastListenEvent = controllerThis.ListenEvent.last(function() {
         controllerThis.song = controllerThis.lastListenEvent.note;
