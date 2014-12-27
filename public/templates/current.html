@@ -2,47 +2,36 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <div class="row">
-        <h3 class="panel-title col-sm-6">{{ current.show || '&nbsp;' }}</h3>
-        <div class="panel-subtitle col-sm-6">{{ current.recording.title || '&nbsp;' }}</div>
+        <h3 class="panel-title col-sm-6">{{ current.artist.name || 'Unknown Artist' }} - {{ current.concert.location || 'Unknown Location' }}</h3>
+        <div class="panel-subtitle col-sm-6">{{ current.concert.date || '&nbsp;' }}</div>
       </div>
     </div>
-    <div class="panel-body">
-      <div class="row listenlog body">
-        <div class="col-sm-12">
-          <div class="row">
-            <div class="col-sm-6 artist">{{ current.artist.name || '&nbsp;' }}</div>
-            <div class="col-sm-6 song">{{ current.song || '&nbsp;' }}</div>
+      <div class="panel-body">
+          <div class="row listenlog body form">
+              <div class="col-sm-12">
+                  <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label class="control-label" for="recording">Recording</label>
+                          <p id="recording" class="form-control-static">{{ current.recording.title || '&nbsp;' }}</p>
+                      </div>
+                      <div class="form-group col-sm-6">
+                          <label class="control-label">Start / Stop</label>
+                          <button type="button"
+                                  class="btn btn-default btn-sm form-control"
+                                  ng-click="current.toggle()">
+                              <span class="fa" ng-class="current.buttonClass" aria-hidden="true"></span> {{ current.buttonText() || '&nbsp;' }}
+                          </button>
+                          <span ng-hide="current.isCollapsed">
+                              <input type="text" ng-model="current.note" class="form-control">
+                              <button type="button" class="btn btn-sm btn-primary form-control" ng-click="current.submit()">{{ current.action_text }}</button>
+                          </span>
+                      </div>
+                  </div><!-- /row -->
+              </div><!-- /row -->
+              <div class="alert" ng-show="new.alertText.length" ng-class="new.alertClass"></div>
+              <div class="row">
+              </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6 date">{{ current.concert.date || '&nbsp;' }}</div>
-            <div class="col-sm-6 buttons">
-                <div class="row">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default btn-sm form-control" ng-click="current.toggle()">
-                                <span class="fa" ng-class="current.button_class" aria-hidden="true"></span> {{ current.button_text() || '&nbsp;' }}
-                            </button>
-                            <span ng-hide="current.isCollapsed">
-                                <input type="text" ng-model="current.note" class="form-control">
-                                <button type="button" class="btn btn-sm btn-primary form-control" ng-click="current.submit()">{{ current.action_text }}</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
   </div>
 </div>
-
-<!--
-
- +----------------+-------------+
- | Current Show   |   Recording |
- +----------------+-------------+
- | Artist               Song    |
- | Date          <start><stop>  |
- +------------------------------+
- -->
