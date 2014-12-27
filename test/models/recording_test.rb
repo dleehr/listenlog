@@ -43,4 +43,11 @@ class RecordingTest < ActiveSupport::TestCase
     assert_equal total_count, listening_count + not_listening_count, 'listening + not listening should equal total'
     assert_equal Recording.listening, Recording.by_listening(true), 'listening should equal by_listening(true)'
   end
+
+  test 'can active recording' do
+    r = Recording.create(title: 'to test active')
+    assert_difference('Recording.active.count') do
+      r.start_listening
+    end
+  end
 end
