@@ -50,4 +50,13 @@ class RecordingTest < ActiveSupport::TestCase
       r.start_listening
     end
   end
+
+  test 'can deactivate recording' do
+    r = Recording.create(title: 'to test deactive')
+    r.start_listening
+    assert_difference('Recording.active.count', -1) do
+      r.finish_listening
+    end
+  end
+
 end
