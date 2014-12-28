@@ -14,7 +14,7 @@ angular.module('listenlog.resources.models',['ngResource'])
         );
     }])
     .factory('ListenEvent', ['$resource', function($resource) {
-        return $resource('/listen_events/:id.json', {},
+        return $resource('/recordings/:recording_id/listen_events/:id.json', {},
             {
                 last: { method: 'GET', params:{ id : 'last' } }
             }
