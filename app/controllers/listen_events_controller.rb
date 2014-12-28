@@ -1,6 +1,6 @@
 class ListenEventsController < ApplicationController
-  before_action :set_listen_event, only: [:show, :edit, :update, :destroy]
   before_action :set_recording
+  before_action :set_listen_event, only: [:show, :edit, :update, :destroy]
   # GET /listen_events
   # GET /listen_events.json
   def index
@@ -71,7 +71,7 @@ class ListenEventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listen_event
-      @listen_event = ListenEvent.find(params[:id])
+      @listen_event = @recording.listen_events.find(params[:id])
     end
 
     def set_recording
