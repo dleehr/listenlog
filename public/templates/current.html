@@ -23,12 +23,15 @@
                           </button>
                           <span ng-hide="current.isCollapsed">
                               <input type="text" ng-model="current.note" class="form-control">
-                              <button type="button" class="btn btn-sm btn-primary form-control" ng-click="current.submit()">{{ current.action_text }}</button>
+                              <button type="button"
+                                      ng-repeat="action in current.actions"
+                                      class="btn btn-sm btn-primary form-control"
+                                      ng-click="current.selectedAction = action; current.submit()">{{ action.text }}</button>
                           </span>
                       </div>
                   </div><!-- /row -->
               </div><!-- /row -->
-              <div class="alert" ng-show="new.alertText.length" ng-class="new.alertClass"></div>
+              <div class="alert" ng-show="current.alertText.length" ng-class="current.alertClass"></div>
               <div class="row">
               </div>
           </div>

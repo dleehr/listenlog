@@ -10,28 +10,46 @@ function CurrentController(Concert, Artist, Recording, ListenEvent) {
     this.Recording = Recording;
     this.ListenEvent = ListenEvent;
     this.isCollapsed = true;
+    this.eventTypes = {
+        START: 1,
+        PAUSE: 2,
+        RESUME: 3,
+        FINISH: 4
+        };
 }
 
 CurrentController.prototype.init = function(recording) {
     this.recording = recording;
-    console.log("initialized with " + recording.title);
     // Now populate things
+    this.reload();
 };
 
 CurrentController.prototype.loadConcerts = function () {
     this.concerts = this.Concert.query();
 };
 
-CurrentController.prototype.reload = function() {
-    // TODO: rework this to start with a recording
+CurrentController.prototype.nextActions = function() {
     var controllerThis = this;
-    this.lastListenEvent = controllerThis.ListenEvent.last(function() {
+    var actions = [];
+    if(    (this.lastListenEvent.event_type == this.eventTypes.START)
+        || (this.lastListenEvent.event_type == this.eventTypes.RESUME)) {
+        // currentlyPlaying
+        actions.push({ text: 'Pause', action: function() { controllerThis.pauseListening(); }});
+        actions.push({ text: 'Finish', action: function() { controllerThis.finishListening(); }});
+    } else {
+        actions.push({ text: 'Resume', action: function() { controllerThis.resumeListening(); }});
+    }
+    return actions;
+};
+
+CurrentController.prototype.reload = function() {
+    var controllerThis = this;
+    this.lastListenEvent = controllerThis.ListenEvent.last({recording_id: controllerThis.recording.id}, function() {
+        controllerThis.actions = controllerThis.nextActions();
         controllerThis.song = controllerThis.lastListenEvent.note;
         controllerThis.updateButton();
-        controllerThis.recording = controllerThis.Recording.get({id:controllerThis.lastListenEvent.recording_id}, function() {
-            controllerThis.concert = controllerThis.Concert.get({id:controllerThis.recording.concert_id}, function () {
-                controllerThis.artist = controllerThis.Artist.get({id:controllerThis.concert.artist_id});
-            });
+        controllerThis.concert = controllerThis.Concert.get({id:controllerThis.recording.concert_id}, function () {
+            controllerThis.artist = controllerThis.Artist.get({id:controllerThis.concert.artist_id});
         });
     });
 };
@@ -61,24 +79,40 @@ CurrentController.prototype.buttonText = function() {
     }
 };
 
+// Can't use the instance method because the API returns a ListenEvent,
+// but the ng-resource REST client will overwrite this.recording with the retrurned ListenEvent
+
+CurrentController.prototype.pauseListening = function() {
+    var controllerThis = this;
+    this.Recording.pauseListening({id: this.recording.id}, {note: this.note}, function() {
+        controllerThis.reload();
+    });
+};
+
+CurrentController.prototype.resumeListening = function() {
+    var controllerThis = this;
+    this.Recording.resumeListening({id: this.recording.id}, {note: this.note}, function() {
+        controllerThis.reload();
+    });
+};
+
+CurrentController.prototype.finishListening = function() {
+    var controllerThis = this;
+    this.Recording.finishListening({id: this.recording.id}, {note: this.note}, function() {
+        controllerThis.reload();
+    });
+};
+
 CurrentController.prototype.submit = function() {
     this.isCollapsed = true;
-    var recordingId = this.recording.id;
-    var controllerThis = this;
     // Determine if pause, resume, or finish
-    if(this.listening()) {
-        this.recording.$pauseListening({id:recordingId,note:this.note}, function() {
-            controllerThis.reload();
-        });
-    } else {
-        this.recording.$resumeListening({id:recordingId,note:this.note}, function() {
-            controllerThis.reload();
-        });
-    }};
+    var action = this.selectedAction.action;
+    action();
+};
 
 CurrentController.prototype.updateDefaultNote = function() {
     if(this.listening()) {
-        this.note = 'Finished';
+        this.note = 'Paused';
     } else {
         this.note = 'Started';
     }
