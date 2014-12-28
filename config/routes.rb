@@ -10,10 +10,10 @@ Listenlog::Application.routes.draw do
       post 'resume_listening'
       post 'finish_listening'
     end
-  end
-  resources :listen_events do
-    collection do
-      get 'last'
+    resources :listen_events do
+      collection do
+        get 'last'
+      end
     end
   end
 

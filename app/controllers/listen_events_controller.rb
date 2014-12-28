@@ -1,14 +1,10 @@
 class ListenEventsController < ApplicationController
   before_action :set_listen_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_recording
   # GET /listen_events
   # GET /listen_events.json
   def index
-    if params[:recording]
-      @listen_events = ListenEvent.by_recording(params[:recording])
-    else
-      @listen_events = ListenEvent.all
-    end
+    @listen_events = ListenEvent.by_recording(@recording)
   end
 
   # GET /listen_events/1
@@ -19,13 +15,13 @@ class ListenEventsController < ApplicationController
   # GET /listen_events/last
   # GET /listen_events/last.json
   def last
-    @listen_event = ListenEvent.last
+    @listen_event = @recording.listen_events.last
     render :show
   end
 
   # GET /listen_events/new
   def new
-    @listen_event = ListenEvent.new
+    @listen_event = ListenEvent.new(recording_id:@recording.id)
   end
 
   # GET /listen_events/1/edit
@@ -39,7 +35,7 @@ class ListenEventsController < ApplicationController
 
     respond_to do |format|
       if @listen_event.save
-        format.html { redirect_to @listen_event, notice: 'Listen event was successfully created.' }
+        format.html { redirect_to recording_listen_event_path(@recording, @listen_event), notice: 'Listen event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @listen_event }
       else
         format.html { render action: 'new' }
@@ -53,7 +49,7 @@ class ListenEventsController < ApplicationController
   def update
     respond_to do |format|
       if @listen_event.update(listen_event_params)
-        format.html { redirect_to @listen_event, notice: 'Listen event was successfully updated.' }
+        format.html { redirect_to recording_listen_event_path(@recording, @listen_event), notice: 'Listen event was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -67,7 +63,7 @@ class ListenEventsController < ApplicationController
   def destroy
     @listen_event.destroy
     respond_to do |format|
-      format.html { redirect_to listen_events_url }
+      format.html { redirect_to recording_listen_events_url(@recording)}
       format.json { head :no_content }
     end
   end
@@ -76,6 +72,10 @@ class ListenEventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_listen_event
       @listen_event = ListenEvent.find(params[:id])
+    end
+
+    def set_recording
+      @recording = Recording.find(params[:recording_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

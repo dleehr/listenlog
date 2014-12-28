@@ -18,9 +18,9 @@
         <td><%= listen_event.event_type %></td>
         <td><%= listen_event.recording_id %></td>
         <td><%= listen_event.note %></td>
-        <td><%= link_to 'Show', listen_event %></td>
-        <td><%= link_to 'Edit', edit_listen_event_path(listen_event) %></td>
-        <td><%= link_to 'Destroy', listen_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', recording_listen_event_path(@recording, listen_event)%></td>
+        <td><%= link_to 'Edit', edit_recording_listen_event_path(@recording, listen_event) %></td>
+        <td><%= link_to 'Destroy', recording_listen_event_path(@recording, listen_event), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,3 @@
 
 <br>
 
-<%= link_to 'New Listen event', new_listen_event_path %>
