@@ -34,10 +34,10 @@ CurrentController.prototype.nextActions = function() {
     if(    (this.lastListenEvent.event_type == this.eventTypes.START)
         || (this.lastListenEvent.event_type == this.eventTypes.RESUME)) {
         // currentlyPlaying
-        actions.push({ text: 'Pause', action: function() { controllerThis.pauseListening(); }});
-        actions.push({ text: 'Finish', action: function() { controllerThis.finishListening(); }});
+        actions.push({ text: 'Pause', showNote: true, defaultNote: 'paused', buttonClass: 'fa-pause', action: function() { controllerThis.pauseListening(); }});
+        actions.push({ text: 'Finish', showNote: false, defaultNote: 'finished', buttonClass: 'fa-flag-checkered', action: function() { controllerThis.finishListening(); }});
     } else {
-        actions.push({ text: 'Resume', action: function() { controllerThis.resumeListening(); }});
+        actions.push({ text: 'Resume', showNote: true, defaultNote: 'resumed', buttonClass: 'fa-play', action: function() { controllerThis.resumeListening(); }});
     }
     return actions;
 };
@@ -47,33 +47,16 @@ CurrentController.prototype.reload = function() {
     this.lastListenEvent = controllerThis.ListenEvent.last({recording_id: controllerThis.recording.id}, function() {
         controllerThis.actions = controllerThis.nextActions();
         controllerThis.song = controllerThis.lastListenEvent.note;
-        controllerThis.updateButton();
         controllerThis.concert = controllerThis.Concert.get({id:controllerThis.recording.concert_id}, function () {
             controllerThis.artist = controllerThis.Artist.get({id:controllerThis.concert.artist_id});
         });
     });
 };
 
-CurrentController.prototype.listening = function() {
-    return this.recording['listening'] == true;
-};
 
-CurrentController.prototype.updateButton = function() {
-    // TODO: rework to pause/resume/finish
-    // array of buttons/actions
-    if(this.listening()) {
-        this.buttonClass = 'fa-stop';
-        this.actionText = 'Stop';
-
-    } else {
-        this.buttonClass= 'fa-play';
-        this.actionText = 'Start';
-    }
-};
-
-CurrentController.prototype.buttonText = function() {
+CurrentController.prototype.buttonText = function(text) {
     if(this.isCollapsed) {
-        return this.action_text;
+        return text;
     } else {
         return 'Cancel';
     }
@@ -110,16 +93,12 @@ CurrentController.prototype.submit = function() {
     action();
 };
 
-CurrentController.prototype.updateDefaultNote = function() {
-    if(this.listening()) {
-        this.note = 'Paused';
-    } else {
-        this.note = 'Started';
-    }
-};
-
 CurrentController.prototype.toggle = function() {
-    // set the default action
-    this.updateDefaultNote();
     this.isCollapsed = !this.isCollapsed;
+    if(this.isCollapsed) {
+        this.note = angular.copy(this.selectedAction.defaultNote);
+    } else {
+        this.selectedAction = null;
+    }
+
 };

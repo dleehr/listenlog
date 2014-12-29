@@ -15,18 +15,21 @@
                           <p id="recording" class="form-control-static">{{ current.recording.title || '&nbsp;' }}</p>
                       </div>
                       <div class="form-group col-sm-6">
-                          <label class="control-label">Start / Stop</label>
-                          <button type="button"
-                                  class="btn btn-default btn-sm form-control"
-                                  ng-click="current.toggle()">
-                              <span class="fa" ng-class="current.buttonClass" aria-hidden="true"></span> {{ current.buttonText() || '&nbsp;' }}
-                          </button>
+                          <label class="control-label">Controls</label>
+                          <!-- Need to rework this to be buttons because the ui-bootstrap radio stuff isn't working -->
+                          <div class="input-group form-control-static btn-group">
+                            <label ng-repeat="action in current.actions"
+                                   class="btn btn-default"
+                                   ng-model="current.selectedAction"
+                                   ng-click="current.toggle()"
+                                   btn-radio="action">
+                                <span class="fa" ng-class="action.buttonClass" aria-hidden="true"></span> {{ current.buttonText(action.text) }}
+                            </label>
                           <span ng-hide="current.isCollapsed">
-                              <input type="text" ng-model="current.note" class="form-control">
+                              <input type="text" ng-model="current.note" class="form-control" ng-show="current.selectedAction.showNote">
                               <button type="button"
-                                      ng-repeat="action in current.actions"
                                       class="btn btn-sm btn-primary form-control"
-                                      ng-click="current.selectedAction = action; current.submit()">{{ action.text }}</button>
+                                      ng-click="current.submit()">{{ action.text }}</button>
                           </span>
                       </div>
                   </div><!-- /row -->
