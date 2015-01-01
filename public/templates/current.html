@@ -28,14 +28,6 @@
                                     current.buttonText(action.text) }}
                                 </button>
                             </div>
-                          <span ng-hide="current.isCollapsed">
-                              <input type="text" ng-model="current.note" class="form-control"
-                                     ng-show="current.selectedAction.showNote">
-                              <button type="button"
-                                      class="btn btn-sm btn-primary form-control"
-                                      ng-click="current.submit()">{{ current.selectedAction.text }}
-                              </button>
-                          </span>
                         </div>
                     </div>
                     <!-- /row -->
@@ -45,6 +37,16 @@
 
                             <p id="note" class="form-control-static">{{ current.lastListenEvent.note || '&nbsp;' }} {{
                                 current.lastListenEvent.created_at || ''}}</p>
+                        </div>
+                        <div class="form-group col-sm-6">
+                          <span ng-hide="current.isCollapsed">
+                              <input type="text" ng-model="current.note" class="form-control"
+                                     ng-show="current.selectedAction.showNote">
+                              <button type="button"
+                                      class="btn btn-sm btn-primary form-control"
+                                      ng-click="current.submit()">{{ current.selectedAction.text }}
+                              </button>
+                          </span>
                         </div>
                     </div>
                     <!-- /row -->
