@@ -44,11 +44,13 @@ CurrentController.prototype.nextActions = function() {
 
 CurrentController.prototype.reload = function() {
     var controllerThis = this;
-    this.lastListenEvent = controllerThis.ListenEvent.last({recording_id: controllerThis.recording.id}, function() {
-        controllerThis.actions = controllerThis.nextActions();
-        controllerThis.song = controllerThis.lastListenEvent.note;
-        controllerThis.concert = controllerThis.Concert.get({id:controllerThis.recording.concert_id}, function () {
-            controllerThis.artist = controllerThis.Artist.get({id:controllerThis.concert.artist_id});
+    this.recording = controllerThis.Recording.get({id:controllerThis.recording.id}, function() {
+        controllerThis.lastListenEvent = controllerThis.ListenEvent.last({recording_id: controllerThis.recording.id}, function() {
+            controllerThis.actions = controllerThis.nextActions();
+            controllerThis.song = controllerThis.lastListenEvent.note;
+            controllerThis.concert = controllerThis.Concert.get({id:controllerThis.recording.concert_id}, function () {
+                controllerThis.artist = controllerThis.Artist.get({id:controllerThis.concert.artist_id});
+            });
         });
     });
 };
