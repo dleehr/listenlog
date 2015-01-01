@@ -93,12 +93,13 @@ CurrentController.prototype.submit = function() {
     action();
 };
 
-CurrentController.prototype.toggle = function() {
+CurrentController.prototype.toggle = function(action) {
     this.isCollapsed = !this.isCollapsed;
     if(this.isCollapsed) {
-        this.note = angular.copy(this.selectedAction.defaultNote);
-    } else {
         this.selectedAction = null;
+    } else {
+        this.selectedAction = action;
+        this.note = angular.copy(this.selectedAction.defaultNote);
     }
 
 };
