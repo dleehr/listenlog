@@ -101,5 +101,24 @@ CurrentController.prototype.toggle = function(action) {
         this.selectedAction = action;
         this.note = angular.copy(this.selectedAction.defaultNote);
     }
+};
 
+CurrentController.prototype.textForLastEvent = function() {
+    var eventType = this.lastListenEvent.event_type;
+    var text = "unknown";
+    switch(eventType) {
+        case this.eventTypes.START:
+            text = "Listening";
+            break;
+        case this.eventTypes.RESUME:
+            text = "Listening";
+            break;
+        case this.eventTypes.PAUSE:
+            text = "Paused";
+            break;
+        case this.eventTypes.FINISH:
+            text = "Finished";
+            break;
+    }
+    return text;
 };

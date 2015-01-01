@@ -15,7 +15,7 @@
                           <p id="recording" class="form-control-static">{{ current.recording.title || '&nbsp;' }}</p>
                       </div>
                       <div class="form-group col-sm-6">
-                          <label class="control-label">Controls</label>
+                          <label class="control-label">Current Status: {{ current.textForLastEvent() }}</label>
                           <div class="input-group form-control-static btn-group">
                               <button ng-repeat="action in current.actions"
                                       class="btn btn-default"
@@ -32,9 +32,6 @@
                       </div>
                   </div><!-- /row -->
               </div><!-- /row -->
-              <div class="alert" ng-show="current.alertText.length" ng-class="current.alertClass"></div>
-              <div class="row">
-              </div>
           </div>
       </div>
   </div>
