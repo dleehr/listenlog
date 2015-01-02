@@ -1,11 +1,11 @@
 <div class="container" ng-controller="HomeController as home">
         <tabset class="row">
-            <tab heading="New recording">
+            <tab heading="New recording" active="home.tabsActive[0]">
                 <div class="row">&nbsp;</div>
                 <!-- New Recording -->
                 <div class="row" ng-include="'/templates/new.html'"></div>
             </tab>
-            <tab heading="Active recordings">
+            <tab heading="Active recordings" active="home.currentActive">
                 <div class="row">&nbsp;</div>
                 <!-- Active Recordings -->
                 <div class="row" ng-repeat="recording in home.activeRecordings" ng-include="'/templates/current.html'"></div>

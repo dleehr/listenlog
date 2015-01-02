@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('listenlog.controllers.new', ['listenlog.resources.models'])
-    .controller('NewController', ['Concert', 'Artist', 'Recording', 'ListenEvent', NewController]);
+    .controller('NewController', ['Concert', 'Artist', 'Recording', 'ListenEvent', '$scope', NewController]);
 
-function NewController(Concert, Artist, Recording, ListenEvent) {
+function NewController(Concert, Artist, Recording, ListenEvent, $scope) {
     // Initialize variables
     this.concert = {};
     this.recording = {};
@@ -12,6 +12,7 @@ function NewController(Concert, Artist, Recording, ListenEvent) {
     this.Artist = Artist;
     this.Recording = Recording;
     this.ListenEvent = ListenEvent;
+    this.scope = $scope; // Need scope to emit event
     this.loadArtists();
 }
 
@@ -36,6 +37,7 @@ NewController.prototype.enableButton = function() {
 NewController.prototype.success = function() {
     this.alertClass = 'alert-success';
     this.alertText = 'Successfully saved and started listening';
+    this.scope.$emit('startedNewRecording');
 };
 
 NewController.prototype.failure = function(err) {
@@ -47,13 +49,12 @@ NewController.prototype.start = function() {
     // concert object is ready to be posted
     var cThis= this;
     var startListening = function(recording) {
-        cThis.recording.$startListening({id:cThis.recording.id,note:'Started'}, cThis.success);
+        cThis.recording.$startListening({id:cThis.recording.id,note:'Started'}, function() { cThis.success(); });
     };
 
     var saveRecording = function(concert) {
         cThis.recording.concert_id = concert.id;
-        cThis.recording = cThis.Recording.save({}, cThis.recording, startListening, cThis.failure);
+        cThis.recording = cThis.Recording.save({}, cThis.recording, startListening, function(err) { cThis.failure(err); });
     };
-    cThis.concert = cThis.Concert.save({},cThis.concert, saveRecording, cThis.failure);
-
+    cThis.concert = cThis.Concert.save({},cThis.concert, saveRecording, function(err) { cThis.failure(err); });
 };

@@ -55,7 +55,6 @@ CurrentController.prototype.reload = function() {
     });
 };
 
-
 CurrentController.prototype.buttonText = function(text) {
     if(this.isCollapsed) {
         return text;
