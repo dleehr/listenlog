@@ -1,0 +1,40 @@
+<div class="container" ng-controller="ArtistController as artistController">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Artists</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row listenlog body">
+                <div class="col-sm-12">
+                    <div class="row form form-inline" ng-repeat="artist in artistController.artists">
+                        <div class="col-sm-12">
+                            <!-- Artist -->
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input ng-model="artist.name" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success form-control" ng-click="artistController.save(artist)">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row form form-inline">
+                        <div class="col-sm-12">
+                            <!-- Artist -->
+                            <h4>Create New</h4>
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input ng-model="artistController.artistName" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success form-control" ng-click="artistController.create()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

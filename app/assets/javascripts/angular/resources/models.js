@@ -2,7 +2,11 @@
 
 angular.module('listenlog.resources.models',['ngResource'])
     .factory('Concert', ['$resource', function($resource) { return $resource('/concerts/:id.json'); }])
-    .factory('Artist', ['$resource', function($resource) { return $resource('/artists/:id.json'); }])
+    .factory('Artist', ['$resource', function($resource) {
+        return $resource('/artists/:id.json', {},
+            { update: { method: 'PUT' }}
+        );
+    }])
     .factory('Recording', ['$resource', function($resource) {
         return $resource('/recordings/:id/:action.json', {},
             {
