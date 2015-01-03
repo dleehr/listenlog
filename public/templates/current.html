@@ -5,7 +5,7 @@
                 <h3 class="panel-title col-sm-6">{{ current.artist.name || 'Unknown Artist' }} - {{
                     current.concert.location || 'Unknown Location' }}</h3>
 
-                <div class="panel-subtitle col-sm-6">{{ current.concert.date || '&nbsp;' }}</div>
+                <div class="panel-subtitle col-sm-6">{{ current.concert.date | date:'yyyy-MM-dd' || '&nbsp;' }}</div>
             </div>
         </div>
         <div class="panel-body">
@@ -33,10 +33,10 @@
                     <!-- /row -->
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label class="control-label" for="note">Note / Song</label>
+                            <label class="control-label" for="note">Last Update</label>
 
-                            <p id="note" class="form-control-static">{{ current.lastListenEvent.note || '&nbsp;' }} {{
-                                current.lastListenEvent.created_at || ''}}</p>
+                            <p id="note" class="form-control-static">{{ current.lastListenEvent.created_at | date: 'medium' || '&nbsp;' }} / {{
+                                current.lastListenEvent.note || ''}}</p>
                         </div>
                         <div class="form-group col-sm-6">
                           <span ng-hide="current.isCollapsed">
