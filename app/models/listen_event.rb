@@ -11,7 +11,7 @@ class ListenEvent < ActiveRecord::Base
   scope :finish_events, lambda{ where :event_type => FINISH }
   scope :active_events, lambda{ where :event_type => [START,PAUSE, RESUME] }
   scope :by_age, lambda{ order :created_at}
-  order :created_at
+  default_scope { order('created_at ASC') }
 
   def is_start?
     event_type == START
