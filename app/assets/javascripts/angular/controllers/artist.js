@@ -36,3 +36,13 @@ ArtistController.prototype.save = function(artist) {
         controllerThis.error = err;
     });
 };
+
+ArtistController.prototype.delete = function(artist) {
+    var controllerThis = this;
+    this.Artist.delete({id:artist.id}, function() {
+        controllerThis.error = null;
+        controllerThis.reloadArtists();
+    }, function(err) {
+        controllerThis.error = err;
+    });
+};
