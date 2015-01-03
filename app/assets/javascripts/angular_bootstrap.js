@@ -6,4 +6,6 @@
 //= require angular-resource
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require angular-moment.min
+//= require moment
 //= require_tree ./angular
