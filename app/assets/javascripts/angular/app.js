@@ -4,5 +4,6 @@ angular.module('listenlog', [
     'listenlog.controllers.home',
     'listenlog.controllers.current',
     'listenlog.controllers.new',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angularMoment'
 ]);

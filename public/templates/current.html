@@ -35,7 +35,7 @@
                         <div class="form-group col-sm-6">
                             <label class="control-label" for="note">Last Update</label>
 
-                            <p id="note" class="form-control-static">{{ current.lastListenEvent.created_at | date: 'medium' || '&nbsp;' }} / {{
+                            <p id="note" class="form-control-static"><span am-time-ago="current.lastListenEvent.created_at" ng-show="current.lastListenEvent"></span> / {{
                                 current.lastListenEvent.note || ''}}</p>
                         </div>
                         <div class="form-group col-sm-6">
