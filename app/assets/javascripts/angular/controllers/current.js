@@ -105,6 +105,9 @@ CurrentController.prototype.toggle = function(action) {
 };
 
 CurrentController.prototype.textForLastEvent = function() {
+    if(this.hasOwnProperty('lastListenEvent') == false) {
+        return ;
+    }
     var eventType = this.lastListenEvent.event_type;
     var text = "unknown";
     switch(eventType) {
