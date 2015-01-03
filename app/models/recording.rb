@@ -7,6 +7,7 @@ class Recording < ActiveRecord::Base
   scope :by_active, lambda{|a| where(active: a)}
   scope :active, lambda{ by_active(true)}
   scope :not_listening, lambda{ by_listening(false)}
+  default_scope { order('created_at DESC') }
 
   validates :title, :presence => true
 
