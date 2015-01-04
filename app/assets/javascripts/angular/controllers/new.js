@@ -7,6 +7,7 @@ function NewController(Concert, Artist, Recording, ListenEvent, $scope) {
     // Initialize variables
     this.concert = {};
     this.recording = {};
+    this.alerts = new Array();
     // Capture resources
     this.Concert = Concert;
     this.Artist = Artist;
@@ -35,14 +36,12 @@ NewController.prototype.enableButton = function() {
 };
 
 NewController.prototype.success = function() {
-    this.alertClass = 'alert-success';
-    this.alertText = 'Successfully saved and started listening';
+    this.alerts.push({type:'success', msg:'Successfully saved and started'});
     this.scope.$emit('startedNewRecording');
 };
 
 NewController.prototype.failure = function(err) {
-    this.alertClass = 'alert-danger';
-    this.alertText = 'Unable to save ' + err;
+    this.alerts.push({type:'danger', msg:'Unable to save: ' + err});
 };
 
 NewController.prototype.start = function() {
@@ -57,4 +56,8 @@ NewController.prototype.start = function() {
         cThis.recording = cThis.Recording.save({}, cThis.recording, startListening, function(err) { cThis.failure(err); });
     };
     cThis.concert = cThis.Concert.save({},cThis.concert, saveRecording, function(err) { cThis.failure(err); });
+};
+
+NewController.prototype.closeAlert = function(index) {
+    this.alerts.splice(index, 1);
 };

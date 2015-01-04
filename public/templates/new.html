@@ -1,4 +1,5 @@
 <div class="container" ng-controller="NewController as new">
+    <alert ng-repeat="alert in new.alerts" type="{{alert.type}}" close="new.closeAlert($index)">{{alert.msg}}</alert>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Start Listening</h3>
@@ -60,9 +61,6 @@
                         </div>
                     </div><!-- /row -->
                 </div><!-- /row -->
-                <div class="alert" ng-show="new.alertText.length" ng-class="new.alertClass"></div>
-                <div class="row">
-                </div>
             </div>
         </div>
     </div>
