@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
+  before_action :authenticate_user!
+
   protected
 
   def verified_request?
