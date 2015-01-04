@@ -1,0 +1,28 @@
+<div class="container" ng-controller="OldController as old">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Inactive Recordings</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row listenlog body">
+                <div class="col-sm-12">
+                    <table class="table">
+                        <tr>
+                            <th>Artist</th>
+                            <th>Concert</th>
+                            <th>Title</th>
+                            <th>Last Event</th>
+                        </tr>
+                        <tr ng-repeat="recording in old.recordings">
+                            <td>{{ recording.concert.artist.name }}</td>
+                            <td>{{ recording.concert.date }}</td>
+                            <td>{{ recording.title }}</td>
+                            <td>{{ recording.lastListenEvent.note }} / <span am-time-ago="recording.lastListenEvent.created_at"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

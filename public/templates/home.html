@@ -10,6 +10,11 @@
                 <!-- Active Recordings -->
                 <div class="row" ng-repeat="recording in home.activeRecordings" ng-include="'/templates/current.html'"></div>
             </tab>
+            <tab heading="Inactive recordings">
+                <div class="row">&nbsp;</div>
+                <!-- InActive Recordings -->
+                <div ng-include="'/templates/old.html'"></div>
+            </tab>
             <tab heading="Artists">
                 <div class="row">&nbsp;</div>
                 <!-- Artists -->
