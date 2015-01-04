@@ -1,4 +1,5 @@
 Listenlog::Application.routes.draw do
+  devise_for :users
   root 'angular_bootstrap#index'
   resources :concerts
   resources :artists
