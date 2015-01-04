@@ -54,4 +54,4 @@ gem 'selenium-webdriver', :require => false
 gem 'angularjs-rails'
 gem 'angular-ui-bootstrap-rails', '~> 0.11.2'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
-
+gem 'devise', '~> 3.4.1'
