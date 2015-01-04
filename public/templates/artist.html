@@ -1,4 +1,5 @@
 <div class="container" ng-controller="ArtistController as artistController">
+    <alert ng-repeat="alert in artistController.alerts" type="{{alert.type}}" close="artistController.closeAlert($index)">{{alert.msg}}</alert>
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Artists</h3>

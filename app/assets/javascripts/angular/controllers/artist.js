@@ -8,6 +8,7 @@ angular.module('listenlog.controllers.artist', ['listenlog.resources.models'])
 
 function ArtistController(Artist) {
     this.Artist = Artist;
+    this.alerts = new Array();
     this.reloadArtists();
 }
 
@@ -20,20 +21,20 @@ ArtistController.prototype.create = function() {
     var newArtist = {'name': this.artistName };
     var controllerThis = this;
     this.Artist.save({},newArtist, function() {
-        controllerThis.error = null;
+        controllerThis.alerts.push({type:'success', msg: 'Created ' + newArtist.name});
         controllerThis.artistName = '';
         controllerThis.reloadArtists();
     }, function(err) {
-        controllerThis.error = err;
+        controllerThis.alerts.push({type:'danger', msg: err});
     });
 };
 
 ArtistController.prototype.save = function(artist) {
     var controllerThis = this;
     this.Artist.update({id:artist.id}, artist, function() {
-        controllerThis.error = null;
+        controllerThis.alerts.push({type:'success', msg: 'Updated ' + artist.name});
     }, function(err) {
-        controllerThis.error = err;
+        controllerThis.alerts.push({type:'danger', msg: err});
     });
 };
 
@@ -41,8 +42,13 @@ ArtistController.prototype.delete = function(artist) {
     var controllerThis = this;
     this.Artist.delete({id:artist.id}, function() {
         controllerThis.error = null;
+        controllerThis.alerts.push({type:'success', msg: 'Deleted ' + artist.name});
         controllerThis.reloadArtists();
     }, function(err) {
-        controllerThis.error = err;
+        controllerThis.alerts.push({type:'danger', msg: err});
     });
+};
+
+ArtistController.prototype.closeAlert = function(index) {
+    this.alerts.splice(index, 1);
 };
