@@ -2,6 +2,12 @@ require 'test_helper'
 
 class RecordingsShowEventsTest < ActionDispatch::IntegrationTest
   fixtures :recordings, :listen_events
+  setup do
+    sign_in_as('testuser@localhost.com', 'monkey1234')
+  end
+  teardown do
+    sign_out('testuser@localhost.com')
+  end
   test 'recordings show events' do
     recording = recordings(:ob_la)
     visit(recording_path(recording))
