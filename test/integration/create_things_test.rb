@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class CreateThingsTest < ActionDispatch::IntegrationTest
+  setup do
+    sign_in_as('testuser@localhost.com', 'monkey1234')
+  end
+  teardown do
+    sign_out('testuser@localhost.com')
+  end
   test 'Create an artist' do
     visit(artists_path)
     click_link('New Artist')

@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @listen_event %> |
-<%= link_to 'Back', listen_events_path %>
+<%= link_to 'Show', recording_listen_event_path(@recording, @listen_event) %> |
+<%= link_to 'Back', recording_listen_events_path(@recording)%>

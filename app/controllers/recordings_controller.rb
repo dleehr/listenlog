@@ -1,5 +1,5 @@
 class RecordingsController < ApplicationController
-  before_action :set_recording, only: [:show, :edit, :update, :destroy, :start_listening, :finish_listening]
+  before_action :set_recording, only: [:show, :edit, :update, :destroy, :start_listening, :pause_listening, :resume_listening, :finish_listening]
   # GET /recordings
   # GET /recordings.json
   def index
@@ -9,6 +9,9 @@ class RecordingsController < ApplicationController
     end
     if params[:listening]
       @recordings = @recordings.by_listening(params[:listening])
+    end
+    if params[:active]
+      @recordings = @recordings.by_active(params[:active])
     end
   end
 
@@ -81,6 +84,36 @@ class RecordingsController < ApplicationController
     end
   end
 
+  # POST /recordings/1/pause_listening
+  # POST /recordings/1/pause_listening.json
+  def pause_listening
+    listen_event = @recording.pause_listening(params[:note])
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Paused listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to pause listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /recordings/1/resume_listening
+  # POST /recordings/1/resume_listening.json
+  def resume_listening
+    listen_event = @recording.resume_listening(params[:note])
+    respond_to do |format|
+      if listen_event
+        format.html { redirect_to @recording, notice: 'Resumed listening' }
+        format.json { render json:listen_event, status: :created }
+      else
+        format.html { redirect_to @recording, notice: 'Unable to resume listening.' }
+        format.json { render json: @recording.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /recordings/1/finish_listening
   # POST /recordings/1/finish_listening.json
   def finish_listening
@@ -96,8 +129,8 @@ class RecordingsController < ApplicationController
     end
   end
 
-
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_recording
       @recording = Recording.find(params[:id])

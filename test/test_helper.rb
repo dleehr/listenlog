@@ -20,4 +20,19 @@ end
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+
+  # devise helpers sign_in doesn't work with integration tests
+  def sign_in_as(user, password)
+    User.where(:email => user).delete_all
+    user = User.create(:password => password, :password_confirmation => password, :email => user)
+    user.save!
+    visit '/'
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => password
+    click_link_or_button('Log in')
+    user
+ end
+ def sign_out(email)
+  # This space intentionally left blank. Should log out but we don't have those links!
+ end
 end

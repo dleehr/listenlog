@@ -15,5 +15,5 @@
   <%= @listen_event.note %>
 </p>
 
-<%= link_to 'Edit', edit_listen_event_path(@listen_event) %> |
-<%= link_to 'Back', listen_events_path %>
+<%= link_to 'Edit', edit_recording_listen_event_path(@recording, @listen_event) %> |
+<%= link_to 'Back', recording_listen_events_path(@recording) %>

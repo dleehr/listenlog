@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class RecordingsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
     @recording = recordings(:aud_la)
+    sign_in(User.first)
+  end
+
+  teardown do
+    sign_out(User.first)
+    @recording = nil
   end
 
   test "should get index" do
@@ -53,6 +60,39 @@ class RecordingsControllerTest < ActionController::TestCase
     end
     assert_redirected_to recording_path(assigns(:recording))
   end
+
+  test "should pause listening" do
+    @recording.start_listening # make sure listening before stop
+    assert_difference('ListenEvent.count', 1) do
+      post :pause_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should resume listening" do
+    @recording.start_listening
+    @recording.pause_listening # make sure paused before resume
+    assert_difference('ListenEvent.count', 1) do
+      post :resume_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should not resume active recording" do
+    @recording.start_listening
+    assert_difference('ListenEvent.count', 0) do
+      post :resume_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
+  test "should not pause non-started recording" do
+    assert_difference('ListenEvent.count', 0) do
+      post :pause_listening, id: @recording
+    end
+    assert_redirected_to recording_path(assigns(:recording))
+  end
+
 
   test "should finish listening" do
     @recording.start_listening # make sure listening before stop

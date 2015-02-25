@@ -1,0 +1,57 @@
+<div class="container" ng-controller="CurrentController as current" ng-init="current.init(recording)" ng-show="current.recording.active">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <h3 class="panel-title col-sm-6">{{ current.artist.name || 'Unknown Artist' }} - {{
+                    current.concert.location || 'Unknown Location' }}</h3>
+
+                <div class="panel-subtitle col-sm-6">{{ current.concert.date | date:'yyyy-MM-dd' || '&nbsp;' }}</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row listenlog body form">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="control-label" for="recording">Recording</label>
+
+                            <p id="recording" class="form-control-static">{{ current.recording.title || '&nbsp;' }}</p>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Current Status: {{ current.textForLastEvent() }}</label>
+
+                            <div class="input-group form-control-static btn-group">
+                                <button ng-repeat="action in current.actions"
+                                        class="btn btn-default"
+                                        ng-click="current.toggle(action)">
+                                    <span class="fa" ng-class="action.buttonClass" aria-hidden="true"></span> {{
+                                    current.buttonText(action.text) }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="control-label" for="note">Last Update</label>
+
+                            <p id="note" class="form-control-static"><span am-time-ago="current.lastListenEvent.created_at" ng-show="current.lastListenEvent"></span> / {{
+                                current.lastListenEvent.note || ''}}</p>
+                        </div>
+                        <div class="form-group col-sm-6">
+                          <span ng-hide="current.isCollapsed">
+                              <input type="text" ng-model="current.note" class="form-control"
+                                     ng-show="current.selectedAction.showNote">
+                              <button type="button"
+                                      class="btn btn-sm btn-primary form-control"
+                                      ng-click="current.submit()">{{ current.selectedAction.text }}
+                              </button>
+                          </span>
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

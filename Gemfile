@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.5'
+gem 'rails', '4.1.8'
 
 # Use Postgres as the database for Active Record
 gem 'pg'
@@ -51,3 +51,7 @@ end
 gem 'capybara', '~> 2.2.1'
 gem 'coveralls', require: false
 gem 'selenium-webdriver', :require => false
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails', '~> 0.11.2'
+gem 'twitter-bootstrap-rails', '~> 3.2.0'
+gem 'devise', '~> 3.4.1'

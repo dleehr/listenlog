@@ -1,4 +1,4 @@
-<%= form_for(@listen_event) do |f| %>
+<%= form_for(@listen_event, url: new_recording_listen_event_path(@recording)) do |f| %>
   <% if @listen_event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@listen_event.errors.count, "error") %> prohibited this listen_event from being saved:</h2>

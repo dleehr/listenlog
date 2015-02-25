@@ -1,0 +1,24 @@
+<div class="container" ng-controller="HomeController as home">
+        <tabset class="row">
+            <tab heading="New recording" active="home.tabsActive[0]">
+                <div class="row">&nbsp;</div>
+                <!-- New Recording -->
+                <div class="row" ng-include="'/templates/new.html'"></div>
+            </tab>
+            <tab heading="Active recordings" active="home.currentActive">
+                <div class="row">&nbsp;</div>
+                <!-- Active Recordings -->
+                <div class="row" ng-repeat="recording in home.activeRecordings" ng-include="'/templates/current.html'"></div>
+            </tab>
+            <tab heading="Inactive recordings">
+                <div class="row">&nbsp;</div>
+                <!-- InActive Recordings -->
+                <div ng-include="'/templates/old.html'"></div>
+            </tab>
+            <tab heading="Artists">
+                <div class="row">&nbsp;</div>
+                <!-- Artists -->
+                <div class="row" ng-include="'/templates/artist.html'"></div>
+            </tab>
+        </tabset>
+</div>
