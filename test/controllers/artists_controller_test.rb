@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class ArtistsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
+    sign_in(User.first)
     @artist = artists(:pj)
+  end
+
+  teardown do
+    sign_out(User.first)
+    @artist = nil
   end
 
   test "should get index" do

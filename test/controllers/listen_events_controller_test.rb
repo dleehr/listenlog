@@ -1,9 +1,17 @@
 require 'test_helper'
 
 class ListenEventsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
+    sign_in(User.first)
     @listen_event = listen_events(:one)
     @recording = @listen_event.recording
+  end
+
+  teardown do
+    @listen_event = nil
+    @recording = nil
+    sign_out(User.first)
   end
 
   test "should get index" do

@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class RecordingsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
     @recording = recordings(:aud_la)
+    sign_in(User.first)
+  end
+
+  teardown do
+    sign_out(User.first)
+    @recording = nil
   end
 
   test "should get index" do

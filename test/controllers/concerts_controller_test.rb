@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class ConcertsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
+    sign_in(User.first)
     @concert = concerts(:atlanta)
+  end
+
+  teardown do
+    sign_out(User.first)
+    @concert = nil
   end
 
   test "should get index" do
