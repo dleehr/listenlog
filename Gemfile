@@ -55,3 +55,5 @@ gem 'angularjs-rails'
 gem 'angular-ui-bootstrap-rails', '~> 0.11.2'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
 gem 'devise', '~> 3.4.1'
+gem 'rails_12factor', group: :production
+ruby '2.2.0'
